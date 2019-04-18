@@ -1,0 +1,131 @@
+<section class="space_review_section">
+  <div class="small_beauty_house_slider">
+    <div class="container">
+      <h4>“Redefining the purpose of space”</h4>
+    </div>
+  </div>
+
+  <div class="container review_section mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="top_bar">
+          <div class="row">
+            <div class="col-md-8 m-auto space_name">
+              <h5 class="f600 color-white">{{ spaceDetails?.title }}</h5>
+            </div>
+            <div class="col-md-4 text-center space_rating">
+              <h5 class="py-3 mb-0"> <a class="btn btn-lg bg-blue color-white"><span>Rating :
+                    {{ rating?.rate ||0 }}</span></a></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="all_reviews">
+          <div class="row main_row">
+            <ng-container *ngFor="let review of reviewList  | slice:slicei:slicea">
+              <div class="single_review">
+                <div class="single_review_header">
+                  <div class="reviewer_img">
+                    <img src="{{profile_picURL}}/{{review?.user?.id}}/{{review?.user?.profile_image}}"
+                      *ngIf="review?.user?.profile_image != null">
+                    <img src="assets/icon/user.png" alt="dp" *ngIf="review?.user?.profile_image == null">
+                  </div>
+                  <div class="reviewer_info">
+                    <h6 class="color-blue mb-0 f13 f600">{{review?.user?.name}} </h6>
+                    <div class="starbox starRating ml-0">
+                      <span class="starPoints"><b>{{ review?.rate }}</b></span>
+                      <ng-template #x let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                        </span>
+                      </ng-template>
+                      <ngb-rating [rate]="review?.rate | number" [starTemplate]="x" max="5" [readonly]="true">
+                      </ngb-rating> <span class="f12 f600"><i>{{review?.updated_at | date :'longDate'}}</i></span>
+                    </div>
+                    <!-- <span class="replyIcon">
+                      <i class="fa fa-reply color-green" aria-hidden="true"></i>
+                    </span> -->
+                  </div>
+                </div>
+                <hr class="my-0">
+                <div class="single_review_text">
+                  <p class="mb-0"> {{review?.review}}</p>
+                </div>
+              </div>
+            </ng-container>
+            <!-- lower section -->
+            <div class="spaceList_footer text-center col-12" *ngIf="lastpage > 1">
+              <div class="btn-group pageToggle">
+                <button type="button" class="btnCLK" (click)="mLeft()"><i class="fa fa-fast-backward"
+                    aria-hidden="true"></i></button>
+                <button type="button" class="btnCLK" (click)="fLeft()" [disabled]="slicei === 0"><i
+                    class="fa fa-step-backward" aria-hidden="true"></i></button>
+                <button type="button" class="btnCLK">Page : {{page}} of {{ lastpage }}</button>
+
+                <button type="button" class="btnCLK" (click)="fRight()" [disabled]="slicea > reviewList.length"><i
+                    class="fa fa-step-forward" aria-hidden="true"></i></button>
+
+                <button type="button" class="btnCLK" (click)="mRight()"><i class="fa fa-fast-forward"
+                    aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- right section -->
+      <div class="col-md-4">
+        <div class="ad" *ngIf="SimilarSpaces != ''">
+          <h4 class="rsT2">Similar Featured Spaces</h4>
+          <div *ngFor="let ads of SimilarSpaces;let i=index">
+            <ng-container *ngIf="i < 2">
+
+
+              <div class="spacebox">
+                <div class="imagebox" (click)="viewSpace(ads.data.id)">
+                  <img src="{{space_picURL}}/{{ads.data.owner_id}}/{{ads.pic}}">
+                </div>
+                <div class="spaceboxtext">
+                  <h5 class="fetured_T">{{ads.data.title}}</h5>
+                  <h6 class="loc"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <span *ngIf="ads.data.cityname">{{ads.data.cityname}},</span>
+                    <span *ngIf="!ads.data.cityname">{{ads.data.statename}},</span>
+                    <span> {{ads.data.statename}} </span>
+                    <span> {{ads.data.postcode}}</span>
+                  </h6>
+                  <div class="starbox starRating">
+                    <ng-template #x let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                      </span>
+                    </ng-template>
+                    <ngb-rating [rate]="ads?.data?.review[0]?.average | number" [starTemplate]="x" max="5"
+                      [readonly]="true">
+                    </ngb-rating>
+                    <span *ngIf="ads?.data?.review[0]?.total_review"><b>
+                        {{ ads?.data?.review[0]?.total_review | number }}</b></span>
+                    <span *ngIf="!ads?.data?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+                  </div>
+                  <button type="button" class="btn btn-block btn_view" (click)="viewSpace(ads.data.id)">View
+                    Details</button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-container>
+  <ngx-spinner bdOpacity=0.9 bdColor="#f39868" size="medium" color="#4abfb3" type="ball-clip-rotate-multiple"
+    fullScreen="false">
+    <p style="color: white"> Loading... Please wait</p>
+  </ngx-spinner>
+</ng-container>
+
+
+<!-- <app-half-circle-spinner [animationDuration]="1000" [size]="40" [color]="'#4abfb3'">
+</app-half-circle-spinner> -->

@@ -1,0 +1,39 @@
+.pageError{
+    text-align: center;
+    background-color: #f3f3f3;
+    padding: 100px;
+}
+.imgnotfound{
+    width: 30%;
+}
+.nfT1{
+    font-size: 90px;
+    font-weight: 600;
+    color: #4abfb3;
+}
+
+.gohome{
+	color: white;
+    font-size: 14px;
+    padding: 10px 40px;
+    background-color: #091d36;
+    font-weight: 600;
+    margin-top: 25px;
+}
+
+
+@media only screen and (max-width:620px) {
+    /* For mobile phones: */
+    .pageError{
+        padding: 45px;
+    }
+	.imgnotfound{
+        width: 80%;
+    }
+    .nfT1{
+        font-size: 65px;
+    }
+    .nfT2{
+        font-size: 17px;
+    }
+}

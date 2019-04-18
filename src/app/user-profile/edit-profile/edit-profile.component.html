@@ -1,0 +1,187 @@
+<div class="edit_profile_section">
+  <div class="container p-0">
+    <div class="user_Header">
+      <h3>Update Profile</h3>
+    </div>
+
+    <div class="text-center profile_pic_upload_sec">
+      <label for="profile_pic_upload" [ngClass]="{'ld-over-inverse running': show_U_spinner}">
+        <input type="file" ng2FileSelect [uploader]="uploader" (change)="importFile($event)" id="profile_pic_upload" />
+        <img src="{{profilePic}}" alt="" onerror="this.onerror=null; this.src='assets/icon/user.png';">
+        <p> <i class="fa fa-pencil-square-o"></i> Change Picture</p>
+        <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_U_spinner"></div>
+      </label>
+
+    </div>
+
+    <div class="edit_profile_form">
+      <form [formGroup]="profile" (ngSubmit)="editSubmit($event)">
+        <div class="form-group fg_fname">
+          <label for="fname" class="label_fname">* First name:</label>
+          <input type="text" class="form-control" name="fname" id="fname" formControlName="fname"
+            placeholder="First name">
+          <div
+            *ngIf="profile.controls['fname'].invalid && (profile.controls['fname'].dirty || profile.controls['fname'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="profile.controls['fname'].errors.required">
+              Firstname is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group fg_lname">
+          <label for="lname" class="label_lname">* Last name:</label>
+
+          <input type="text" class="form-control" name="lname" id="lname" formControlName="lname"
+            placeholder="Last name">
+          <div
+            *ngIf="profile.controls['lname'].invalid && (profile.controls['lname'].dirty || profile.controls['lname'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="profile.controls['lname'].errors.required">
+              Lastname is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group fg-email">
+          <label for="email" class="label_email">* Email:</label>
+
+          <input type="text" class="form-control" name="email" id="email" formControlName="email" placeholder="Email">
+          <div
+            *ngIf="profile.controls['email'].invalid && (profile.controls['email'].dirty || profile.controls['email'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="profile.controls['email'].errors.required">
+              <h6>Email is required.</h6>
+            </div>
+            <div *ngIf="profile.controls['email'].errors?.pattern">
+              Email is not valid.
+            </div>
+            <div *ngIf="profile.controls['email'].errors.duplicate">
+              {{profile.controls['email'].errors.duplicate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group fg_phone">
+          <label for="phone" class="label_phone">* Phone No.</label>
+
+          <input type="text" class="form-control" name="phone" id="phone" formControlName="phone"
+            placeholder="Phone No">
+          <div
+            *ngIf="profile.controls['phone'].invalid && (profile.controls['phone'].dirty || profile.controls['phone'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="profile.controls['phone'].errors.required">
+              Phone no. is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="belowTag">
+          <p class="f12 p1 mb-0 w-45 float-left">*Click any field to edit!</p>
+          <p class="f12 p2 mb-0 w-45 ml-3 float-right" (click)="openmodal_c_p(changepswd)"><i class="fa fa-lock"></i>
+            Change password</p>
+
+          <p class="f12 p2 mb-0 w-45 float-right " (click)="openmodal_c_p(changerole)" *ngIf="user.role != 4"><i class="fa fa-user-circle"></i>
+            Change Role</p>
+        </div>
+
+        <div class="clearfix btn_updatebox text-center">
+          <button type="submit" class="btn btn-blue btn_cancel" (click)="goback()">Back</button>
+          <button type="submit" class="btn btn-blue btn_update" [disabled]='!profile.valid'>Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<ng-template #changepswd let-c="close" let-d="dismiss">
+  <div class="modal-header st-pop">
+    <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-exclamation-triangle"></i> Change Account Password!
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="showThisDIV">
+    <div class="changepswdDIV">
+      <form [formGroup]="changepswdForm" (ngSubmit)="change_my_pswd()">
+        <div class="form-group text-center mb-2">
+          <input type="password" class="form-control" placeholder="Old Password *" name="old_password"
+            formControlName="old_password" [ngClass]="{ 'is-invalid': (submitted && f.old_password.errors) || errMSG }"
+            required>
+        </div>
+        <div *ngIf="submitted && f.old_password.errors" class="invalid-feedback">
+          <div *ngIf="f.old_password.errors.required">*Password is required</div>
+          <div *ngIf="f.old_password.errors.minlength">*Minimum 6 Letters</div>
+        </div>
+
+        <div class="invalid-feedback" *ngIf="errMSG">
+          {{errMSG}}
+        </div>
+
+        <div class="form-group text-center mb-2">
+          <input type="password" class="form-control" placeholder="New Password *" name="new_password"
+            formControlName="new_password" [ngClass]="{ 'is-invalid': submitted && f.new_password.errors }" required>
+        </div>
+        <div *ngIf="submitted && f.new_password.errors" class="invalid-feedback">
+          <div *ngIf="f.new_password.errors.required">*Password is required</div>
+          <div *ngIf="f.new_password.errors.minlength">*Minimum 6 Letters</div>
+        </div>
+
+        <div class="form-group text-center mb-2">
+          <input type="password" class="form-control" placeholder="Confirm password *" name="confirm_password"
+            formControlName="confirm_password" [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+            required>
+        </div>
+
+
+        <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+          <div *ngIf="f.confirm_password.errors.required">*Confirm your Password</div>
+          <div *ngIf="f.confirm_password.errors.minlength">*Minimum 6 Letters</div>
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="changepswdForm.errors?.mismatch && (changepswdForm.controls['confirm_password'].dirty || changepswdForm.controls['confirm_password'].touched)">
+          Passwords don't match.
+        </div>
+        <div class="changePSWD text-center mt-3">
+          <button class="btn">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="valid-feedback text-center f17" *ngIf="successMSG != ''">
+      {{ successMSG }} <i class="fa fa-check-circle"></i>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #changerole let-c="close" let-d="dismiss">
+  <div class="modal-header st-pop">
+    <h4 class="modal-title" id="modal-basic-title"><i class="fa fa-exclamation-triangle"></i> Change Account Role!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="changeRole">
+      <form [formGroup]="changeRoleForm" (ngSubmit)="change_my_role()">
+        <div class="form-group mb-2 ml-3">
+          <label class="radio_label d-block">
+            <input type="radio" value="4" formControlName="role"> Space Owner & Renter 
+          </label>
+        </div>
+        <hr>
+        <div class="text-center">
+          <button type="submit" class="btn btn-blue btn-block" [disabled]='!changeRoleForm.valid'>Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</ng-template>

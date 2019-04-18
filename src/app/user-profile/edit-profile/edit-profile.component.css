@@ -1,0 +1,172 @@
+.user_Header {
+  margin-bottom: 10px;
+  background-color: #f39968;
+}
+.user_Header h3 {
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 0;
+}
+
+.profile_pic_upload_sec img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile_pic_upload_sec label {
+  font-size: 13px;
+  color: #4abfb3;
+  cursor: pointer;
+}
+
+#profile_pic_upload {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+.form-control {
+  height: 46px;
+}
+.label_lname,
+.label_fname,
+.label_email,
+.label_phone {
+  font-weight: 600;
+  width: 25%;
+  padding-right: 10px;
+  text-align: right;
+  color: #4abfb3;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+.form-control {
+  width: 65%;
+  display: inline-block;
+}
+.belowTag {
+  margin-left: 25%;
+  width: 65%;
+}
+.belowTag .p1 {
+  color: skyblue;
+}
+.belowTag .p2 {
+  color: #4abfb3;
+}
+.belowTag .p2:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn_updatebox {
+  margin-bottom: 20px;
+}
+
+.btn_update,
+.btn_cancel {
+  padding: 7px 0px;
+  width: 150px;
+  margin: 25px 10px 0 10px;
+  border-radius: 0;
+}
+.btn.btn_update:hover,
+.btn.btn_cancel:hover {
+  background-color: #f39968 !important;
+}
+
+.alert-danger {
+  margin-left: 25%;
+  width: 65%;
+}
+
+/* change password modal  */
+.modal-content {
+  background-color: #f0f7e7;
+}
+.modal-body .form-group {
+  margin-bottom: 5px;
+}
+
+.changePSWD .btn {
+  background-color: #4abfb3;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 2px;
+}
+.changePSWD .btn:hover {
+  background-color: #091d36;
+  color: white;
+}
+.changepswdDIV .form-group {
+  margin-bottom: 5px;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-left: 18%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.valid-feedback {
+  display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .user_Header h3 {
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .user_Header h3 {
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+  .form-control {
+    height: 35px;
+  }
+
+  .label_lname,
+  .label_fname,
+  .label_email,
+  .label_phone {
+    width: 32%;
+    font-size: 12px;
+    padding-right: 10px;
+  }
+  .form-group {
+    margin-bottom: 5px;
+  }
+  .form-control {
+    width: 67%;
+    display: inline-block;
+  }
+  .btn_updatebox {
+    margin-bottom: 15px;
+  }
+  .btn_update,
+  .btn_cancel {
+    padding: 6px 0px;
+    width: 110px;
+    margin-top: 0px;
+  }
+}
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+  /* For ipad: */
+  .user_Header h3 {
+    padding: 13px 0;
+    font-size: 21px;
+  }
+}

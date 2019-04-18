@@ -1,0 +1,484 @@
+.space_lisitng {
+  background-image: url("/assets/bc_img/space-listing.jpg");
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.header_txt {
+  padding: 55px 0 30px 0;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 31px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+/* -------------price slider---------- */
+
+.price_slider {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  height: 40px;
+}
+
+::ng-deep .ng5-slider {
+  margin: 19px 0 0px !important;
+}
+
+::ng-deep .ng5-slider .ng5-slider-pointer {
+  height: 16px !important;
+  width: 16px !important;
+  top: -6px !important;
+}
+
+::ng-deep .ng5-slider .ng5-slider-pointer:after {
+  top: 4px !important;
+  left: 4px !important;
+}
+
+::ng-deep .ng5-slider .ng5-slider-bubble {
+  bottom: 4px !important;
+  font-size: 12px !important;
+}
+
+/* --------------- */
+
+.search_btnBox {
+  margin: auto;
+}
+
+.btn_search {
+  font-size: 17px;
+  margin-left: 5px;
+  padding: 10px 60px;
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+.sorting {
+  background-color: #dedede;
+  margin: 0;
+}
+
+.sorting_sec {
+  padding: 5px;
+}
+
+.fa_gp {
+  padding: 0 8px;
+}
+
+.sortby {
+  padding-right: 20px;
+}
+
+.sortby select option {
+  font-size: 13px;
+}
+
+a:visited {
+  color: #091d36;
+}
+
+/*---------------------------------------------- result section------------------------------------------- */
+
+.resultSection {
+  margin-top: 5px;
+}
+
+.no_result_preview {
+  background-color: #f4f4f4;
+}
+
+.no_result_preview img {
+  height: 150px;
+  width: 300px;
+}
+
+/* .no_result_preview h2 {
+  font-size: 70px;
+  font-weight: 600;
+  color: #4abfb3;
+} */
+
+.fTL {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.rowHeader {
+  padding: 15px 0;
+}
+
+.btn_lg {
+  /* color: #4abfb3; */
+  margin: 0 5px;
+  background-color: #ffffff;
+}
+
+/* ---------------------grid view -------------------------*/
+
+.searchResultGrid .spacebox_wrapper {
+  padding: 0 4px;
+}
+
+.spacebox {
+  /* margin-bottom: 25px; */
+  background-color: #f4f4f4;
+  color: #555555;
+}
+
+.spacebox img {
+  width: 100%;
+  height: 170px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.spacebox_info {
+  height: 130px;
+  position: relative;
+}
+
+.spacebox_info h5 {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px 0 2px 0;
+  padding-left: 7px;
+  max-height: 33px;
+  overflow: hidden;
+}
+
+.loc {
+  font-size: 13px;
+  font-style: italic;
+  padding-left: 6px;
+  line-height: 15px;
+  max-height: 30px;
+  width: 97%;
+  overflow: hidden;
+  color: dimgrey;
+}
+
+.loc .fa {
+  padding-right: 5px;
+}
+
+.spacebox_info .btn-green {
+  font-size: 14px;
+  color: white;
+  border-radius: 0;
+  position: absolute;
+  bottom: 0;
+}
+
+.btn-green:hover {
+  background-color: #f39968;
+}
+
+.fa-star {
+  padding-right: 5px;
+}
+
+.starbox {
+  padding-left: 10px;
+}
+
+.starmark {
+  font-size: 18px;
+}
+
+/* css hover effect */
+
+.box8 {
+  overflow: hidden;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+.box8 .icon {
+  margin: 0;
+  position: absolute;
+}
+
+.box8 .box-content {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: perspective(400px) rotateX(-90deg);
+  transform-origin: center top 0;
+  transition: all 0.5s ease 0s;
+}
+
+.box8 .icon .btn {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(74, 191, 179, 0.6);
+  padding: 4px 20px;
+  border-radius: 3px !important;
+}
+
+.box8:hover .box-content {
+  opacity: 1;
+  transform: perspective(400px) rotateX(0);
+}
+
+.box8 .icon {
+  list-style: none;
+  padding: 0;
+  top: 42%;
+  left: 0;
+  right: 0;
+}
+
+.box8 .icon a:hover {
+  color: #ffffff !important;
+  background-color: rgba(74, 191, 179, 1);
+}
+
+/*---------------------- list view ----------------------*/
+
+.rowList {
+  padding: 15px 5px;
+  margin: 5px 0;
+  background-color: #4abfb3;
+  border-radius: 5px;
+}
+
+.imgLIST img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.spacename_List {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px 0 2px 0;
+  max-height: 33px;
+  overflow: hidden;
+}
+
+.btn-LV .btn-blue {
+  font-size: 14px;
+  border-radius: 0;
+  padding: 12px 40px;
+}
+
+.spacename_List,
+.loc_List,
+.starbox_List {
+  color: white;
+}
+
+.form-control {
+  margin-bottom: 4px;
+}
+
+@media only screen and (max-width: 620px) {
+
+  /* For mobile phones: */
+  .wC {
+    font-size: 14px;
+  }
+
+  .min_pad {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .ppd {
+    width: 40vw;
+  }
+
+  /*.search_btnBox {
+    margin-bottom: 30px;
+  }*/
+  .sortby {
+    padding-right: 20px;
+    margin: auto;
+  }
+
+  .btn_search {
+    font-size: 14px;
+    padding: 7px 30px;
+    width: 95%;
+  }
+
+  /* result section */
+  .resultSection {
+    margin-top: 0px;
+  }
+
+  .fTL {
+    font-size: 18px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+    font-weight: 600;
+  }
+
+  .imagebox img {
+    height: 215px;
+  }
+
+  .lgDIV {
+    padding-right: 0;
+    margin-right: 0;
+    /* padding-left: 25px; */
+  }
+
+  .btn_lg {
+    padding: 0;
+    margin: 0;
+    background: none;
+    font-size: 14px;
+  }
+
+  .sortby .dis_inline select {
+    width: 120px;
+    font-size: 13px;
+  }
+
+  /* list view */
+  .rowHeader {
+    padding: 5px 0;
+  }
+
+  .rowList {
+    padding: 8px 3px;
+    margin: 4px 0;
+  }
+
+  .imgLIST {
+    padding: 0px 5px;
+  }
+
+  .imgLIST img {
+    height: 78px;
+  }
+
+  .spacename_List {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .loc_List,
+  .starbox_List {
+    font-size: 12px;
+  }
+
+  .detLIST {
+    padding: 0px 3px;
+  }
+
+  .btn-LBox {
+    padding: 0;
+  }
+
+  #showDT {
+    display: none;
+  }
+
+  .btn-LV .btn-blue {
+    font-size: 12px;
+    border-radius: 0;
+    padding: 7px 18px;
+  }
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+
+  /* For ipad: */
+  .wC {
+    font-size: 13px;
+  }
+
+  .dropdown {
+    padding: 8px 2px;
+  }
+
+  .btn_search {
+    font-size: 15px;
+    padding: 10px 35px;
+    /* margin-bottom:10px; */
+    width: 93%;
+  }
+
+  /* result section */
+  .resultSection {
+    margin-top: 25px;
+  }
+
+  .fTL {
+    font-size: 17px;
+    margin-top: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .imagebox img {
+    height: 135px;
+  }
+
+  .space_title_grid {
+    font-size: 13px;
+  }
+
+  .loc {
+    font-size: 11px;
+  }
+
+  .starbox {
+    font-size: 12px;
+  }
+
+  .spacebox_info .btn-green {
+    font-size: 12px;
+  }
+
+  .rowHeader {
+    padding: 0;
+  }
+
+  .btn-LV .btn-blue {
+    padding: 12px 25px;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.1rem 0.1rem;
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-device-width: 767px) {
+  .form-control {
+    margin-bottom: 10px;
+  }
+
+  .btn_search {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+
+  .mt {
+    margin-top: 5px;
+  }
+}
+
+@media only screen and (min-width: 812px) and (max-width: 1023px) {
+  .btn_search {
+    width: 100%;
+    padding: 10px 30px;
+  }
+}

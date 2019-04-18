@@ -1,0 +1,100 @@
+<div class="billingpage">
+  <div class="small_beauty_house_slider">
+    <div class="container">
+      <h4 class="sbhT1">Payment</h4>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row extraPad">
+      <div class="col-md-8 ">
+        <div class="billingdetail">
+          <h2 class="bdT1">Billing Details</h2>
+          <form>
+            <div class="form-group fgL ">
+              <input type="text" class="form-control" id="fname" placeholder="*First Name" name="fname" required>
+            </div>
+
+            <div class="form-group fgR">
+              <input type="text" class="form-control" id="lname" placeholder="*Last Name" name="lname" required>
+            </div>
+
+            <div class="form-group ">
+              <input type="text" class="form-control" id="company" placeholder="Company Name (optional)" name="company">
+            </div>
+
+            <div class="form-group ">
+              <input type="text" class="form-control" id="street" placeholder="*Street Address" name="street" required>
+            </div>
+
+            <div class="form-group ">
+              <input type="text" class="form-control" id="city" placeholder="*Town/City" name="city" required>
+            </div>
+
+            <div class="form-group fgL">
+              <input type="text" class="form-control" id="state" placeholder="*State" name="state/Country" required>
+            </div>
+
+            <div class="form-group fgR">
+              <input type="text" class="form-control" id="zip" placeholder="*Postcode" name="zip" required>
+            </div>
+
+            <div class="form-group fgL">
+              <input type="email" class="form-control" id="email" placeholder="*Email" name="email" required>
+            </div>
+
+            <div class="form-group fgR">
+              <input type="text" class="form-control" id="number" placeholder="*Phone" name="phone" required>
+            </div>
+
+            <div class="paymentbox">
+              <h6 class="color-green pwT1">Pay with :</h6>
+              <div class="form-check">
+                <label class="form-check-label" for="radio1">
+                  <input type="radio" class="form-check-input paypalRad" id="radio1" name="optradio" value="option1"
+                    checked>Paypal
+                </label>
+                <img src="assets/logo/paypal.png" class="paypalIMG" alt="">
+              </div>
+              <div class="paypalView f12">
+                <p class="extrainfo_P1">Pay via PayPal: You can pay with your credit card if you don't have a PayPal
+                  account.<strong>
+                    SANDBOX ENABLED</strong>. You can use sandbox testing accounts only. See the PayPal Sandbox Testing
+                  Guide for more details.</p>
+              </div>
+              <div class="btn_PAY text-center">
+                <button type="submit" class="btn btn_payment">Proceed To PayPal</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="ad">
+          <h4 class="rsT2">Featured Space</h4>
+          <div *ngFor="let ads of Featured_Ad">
+            <div class="spacebox">
+              <div class="imagebox">
+                <img src="{{ads.image}}">
+              </div>
+              <div class="spaceboxtext">
+                <h5 class="fetured_T">{{ads.spaceType}}</h5>
+                <h6 class="loc"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ads.location}}</h6>
+                <div class="starbox">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span>
+                  <span>{{ads.stars}}</span>
+                </div>
+                <button type="button" class="btn btn-block btn_view">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

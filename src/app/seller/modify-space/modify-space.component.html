@@ -1,0 +1,650 @@
+<style>
+  .not_avail_span {
+    margin: 5px;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: orange;
+    color: #fff;
+    position: relative;
+  }
+
+  .not_avail_span i {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+</style>
+<section class="create-space">
+  <div class="container cont_new_space">
+    <div class="space_Header">
+      <h3>Describe your Space</h3>
+    </div>
+    <form [formGroup]="spaceForm" *ngIf="spaceForm" (ngSubmit)="previewSpace()">
+      <div id="accordion">
+        <!-- card1 details working -->
+        <div class="card card1">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseDetail">
+              <h5 class="mb-0">
+                Space Details* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseDetail" class="collapse show" data-parent="#accordion">
+            <div class="card-body">
+
+              <div class="form-row">
+                <div class="form-group col-md-4 m-auto">
+                  <label for="spaceType">Space Title</label>
+                </div>
+                <div class="form-group col-md-8">
+                  <input type="text" class="form-control" id="spaceTitle" placeholder="Name your space *"
+                    formControlName="spaceTitle">
+                  <div
+                    *ngIf="spaceForm.controls['spaceTitle'].invalid && (spaceForm.controls['spaceTitle'].dirty || spaceForm.controls['spaceTitle'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['spaceTitle'].errors.required">
+                      This field is required!
+                    </div>
+                    <div *ngIf="spaceForm.controls['spaceTitle'].errors.minlength">
+                      Minimum 10 characters required!
+                    </div>
+                    <div *ngIf="spaceForm.controls['spaceTitle'].errors.maxlength">
+                      Maximum 50 characters allowed!
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-row">
+                <div class="form-group col-md-4 m-auto">
+                  <label for="spaceType">Space Type</label>
+                </div>
+                <div class="form-group col-md-8">
+                  <select id="spaceType" class="form-control" formControlName="spaceType">
+                    <option selected value="">Choose...</option>
+                    <option [value]="spacetype.id" *ngFor="let spacetype of SpaceTypes">{{ spacetype.name }}</option>
+                  </select>
+                  <div
+                    *ngIf="spaceForm.controls['spaceType'].invalid && (spaceForm.controls['spaceType'].dirty || spaceForm.controls['spaceType'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['spaceType'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4 m-auto">
+                  <label for="spaceCapacity">Capacity of Space</label>
+                </div>
+                <div class="form-group col-md-8">
+                  <select id="spaceCapacity" class="form-control" formControlName="spaceCapacity"
+                    (change)="capacityChange($event.target.value)">
+                    <option selected value="">Choose...</option>
+                    <option [value]="capacity.id" *ngFor="let capacity of CapacityList">{{ capacity.name }} persons
+                    </option>
+                  </select>
+
+                  <div *ngIf="showCapacityInput">
+                    <input type="number" class="form-control" placeholder="Specify *"
+                      formControlName="otherSpaceCapacity">
+                    <div
+                      *ngIf="spaceForm.controls['otherSpaceCapacity'].invalid && (spaceForm.controls['otherSpaceCapacity'].dirty || spaceForm.controls['otherSpaceCapacity'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="spaceForm.controls['otherSpaceCapacity'].errors.required">
+                        <i class="fa fa-exclamation-triangle"></i> This field is required!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    *ngIf="spaceForm.controls['spaceCapacity'].invalid && (spaceForm.controls['spaceCapacity'].dirty || spaceForm.controls['spaceCapacity'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['spaceCapacity'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card 4 overview working -->
+        <div class="card card4">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseOverview">
+              <h5 class="mb-0">
+                Overview* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseOverview" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="overview">Overview
+                  <span class="help">
+                    <a href="" tooltip="{{ OverViewTips }}" placement="right">Need Help <i
+                        class="fa fa-question-circle"></i></a>
+                  </span>
+                </label>
+                <textarea class="form-control" rows="5" id="overview" placeholder="Describe Your Space . . . "
+                  formControlName="spaceDescribe"></textarea>
+                <div
+                  *ngIf="spaceForm.controls['spaceDescribe'].invalid && (spaceForm.controls['spaceDescribe'].dirty || spaceForm.controls['spaceDescribe'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="spaceForm.controls['spaceDescribe'].errors.required">
+                    This field is required!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card 2 address working -->
+        <div class="card card2">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseAddress">
+              <h5 class="mb-0">
+                Address* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseAddress" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputAddress">Address 1</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Apartment, studio, or floor"
+                  formControlName="inputAddress">
+                <div
+                  *ngIf="spaceForm.controls['inputAddress'].invalid && (spaceForm.controls['inputAddress'].dirty || spaceForm.controls['inputAddress'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="spaceForm.controls['inputAddress'].errors.required">
+                    This field is required!
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputAddress2">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Locality"
+                  formControlName="inputAddress2">
+                <div
+                  *ngIf="spaceForm.controls['inputAddress2'].invalid && (spaceForm.controls['inputAddress2'].dirty || spaceForm.controls['inputAddress2'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="spaceForm.controls['inputAddress2'].errors.required">
+                    This field is required!
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-4">
+                  <label for="inputCity">State</label>
+                  <!-- <input type="text" class="form-control" id="inputState" formControlName="inputState"> -->
+                  <select id="inputState" class="form-control" formControlName="inputState"
+                    (change)="stateChange($event.target.value, $event.target.options[$event.target.options.selectedIndex].text)">
+                    <option selected value="">Choose State...</option>
+                    <option [value]="State.id" *ngFor="let State of StateList">{{State.name}}</option>
+                  </select>
+                  <div
+                    *ngIf="spaceForm.controls['inputState'].invalid && (spaceForm.controls['inputState'].dirty || spaceForm.controls['inputState'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['inputState'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="form-group col-md-4">
+                  <label for="inputCity">City</label>
+                  <!-- <input type="text" class="form-control" id="inputCity" formControlName="inputCity"> -->
+                  <select id="inputCity" class="form-control" formControlName="inputCity">
+                    <option selected value="">Choose City...</option>
+                    <option [value]="City.id" *ngFor="let City of CityList">{{City.name}}</option>
+                  </select>
+                  <div
+                    *ngIf="spaceForm.controls['inputCity'].invalid && (spaceForm.controls['inputCity'].dirty || spaceForm.controls['inputCity'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['inputCity'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div> -->
+
+                <div class="form-group col-md-4">
+                  <label for="inputZip">Postcode</label>
+                  <input type="text" class="form-control" id="inputZip" formControlName="inputZip"
+                    onkeyup="this.value=this.value.replace(/\D/g, '')">
+                  <div
+                    *ngIf="spaceForm.controls['inputZip'].invalid && (spaceForm.controls['inputZip'].dirty || spaceForm.controls['inputZip'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['inputZip'].errors.required">
+                      This field is required!
+                    </div>
+                    <div *ngIf="spaceForm.controls['inputZip'].errors.maxlength">
+                      Invalid Post Code
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- card 5 image working -->
+        <div class="card card5">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseImages">
+              <h5 class="mb-0">
+                Attach Images* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseImages" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                  <label for="fileupload">Pictures :
+                    <span class="help imgHELP">
+                      <a href="" tooltip="{{ ImageTips }}" placement="right">Need Help <i
+                          class="fa fa-question-circle"></i></a>
+                    </span>
+                  </label>
+
+                  <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                    [uploader]="uploader" (onFileDrop)="onFileSelected($event)" class="well my-drop-zone dropArea">
+                    <p class="chooseFile" (click)="file.click()">Choose images to upload!</p>
+                    <p class="chooseFileText">or drag and drop them here</p>
+                  </div>
+                  <input #file type="file" ng2FileSelect [uploader]="uploader" multiple
+                    (onFileSelected)="onFileSelected($event)" multiple style="display:none" />
+                </div>
+
+                <div class="col-6 mb-0 mt-4 row imagePreview">
+                  <!-- <ng-container *ngIf="inComingFilesURL.length !== 0">
+                    <div class="col-4 mb-1" *ngFor="let inIMG of inComingFilesURL; let i=index;">
+                      <i class="fa fa-plus-circle trashImage" (click)="trashIncomingImage(i)"></i>
+                      <img src="{{ inIMG }}">
+                    </div>
+                  </ng-container> -->
+
+
+                  <ng-container *ngIf="inComingFiles.length !== 0">
+                    <div class="col-4 mb-1" *ngFor="let inIMG of inComingFiles; let i=index;">
+                      <i class="fa fa-plus-circle trashImage 12" (click)="trashIncomingImage(i)"></i>
+                      <img src="{{picURL}}/{{user.id}}/{{ inIMG }}">
+                    </div>
+                  </ng-container>
+
+
+                  <ng-container *ngIf="uploadFiles.length !== 0">
+                    <div class="col-4 mb-1" *ngFor="let uF of uploadFiles; let i=index;">
+                      <i class="fa fa-plus-circle trashImage 21" (click)="trashImage(i)"></i>
+                      <img src="{{uF[2]}}">
+                    </div>
+                  </ng-container>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- card6 amenities working -->
+        <div class="card card6">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseAmenities">
+              <h5 class="mb-0">
+                Amenities Included*<i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseAmenities" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="amenities">
+                <p>Amenities/Facilities available :
+                  <span class="help">
+                    <a href="" tooltip="{{ AmenityTips }}" placement="right">Need Help <i
+                        class="fa fa-question-circle"></i></a>
+                  </span>
+                </p>
+                <div class="form-check form-check-inline col-md-4 col-6" *ngFor="let amenity of AmenityList">
+                  <input class="form-check-input" type="checkbox" [value]="amenity.id"
+                    [checked]="isAmenitySelected(amenity.id)" id="d{{ amenity.id }}"
+                    (change)="amenityChange(amenity.id)">
+                  <label class="form-check-label" for="d{{ amenity.id }}">{{ amenity.amenities_name }}</label>
+                </div>
+                <div class="otherAmenity_wrapper mt-3">
+                  <div class=" form-inline">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text color-green">Other amenities you want to add:</div>
+                    </div>
+                    <input type="text" class="form-control " formControlName="otherAmenities" #amInput>
+                    <a class="btn bg-green color-white" type="button" (click)='addToOtherAmenityList(amInput.value)'>
+                      <i class="fa fa-plus px-3"></i>
+                    </a>
+
+                  </div>
+                  <div class="otherAmenity_List mt-2" *ngIf="OtherAmenityList">
+                    <ul class="list-inline mb-1">
+                      <li class="list-inline-item" *ngFor="let am of OtherAmenityList">{{am}}
+                        <i class="fa fa-minus-circle text-danger" aria-hidden="true"
+                          (click)="removeFromOtherAmenityList(am)"></i>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div *ngIf="spaceForm.controls['amenity'].errors && spaceForm.controls['amenity'].errors.custom"
+                  class="alert alert-danger">
+                  This field is required!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- card 3 availabity working -->
+        <div class="card card3">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseAvailablity">
+              <h5 class="mb-0">
+                Availablity*<i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseAvailablity" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+
+              <div class="form-row">
+                <div class="form-group col-md-6 ">
+                  <label for="from_date">From (MM/DD/YYYY):</label>
+                  <input class="form-control" (dateSelect)="onDateSelect($event,'from')" placeholder="MM/DD/YYYY"
+                    [value]="ngbFromDate" ngbDatepicker #fd="ngbDatepicker" (click)="fd.toggle()" [minDate]=minDate_From
+                    readonly />
+                  <input type="hidden" formControlName="from_date" />
+                  <div
+                    *ngIf="spaceForm.controls['from_date'].invalid && (spaceForm.controls['from_date'].dirty || spaceForm.controls['from_date'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['from_date'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="to_date">To (MM/DD/YYYY):</label>
+                  <input class="form-control" [value]="ngbToDate" (dateSelect)="onDateSelect($event,'to')"
+                    placeholder="MM/DD/YYYY" dateFormat="yyyy-MM-dd" ngbDatepicker #td="ngbDatepicker"
+                    (click)="td.toggle()" [minDate]=minDate_To [value]="ngbToDate" readonly />
+                  <input type="hidden" formControlName="to_date" />
+                  <div
+                    *ngIf="spaceForm.controls['to_date'].invalid && (spaceForm.controls['to_date'].dirty || spaceForm.controls['to_date'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['to_date'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-12">
+                  <div class="checkbox1">
+                    <label tooltip="{{ 'Fill both above Fields first' }}" placement="right"><input type="checkbox"
+                        [checked]="isNotAvailableCheck" name="not_avail" (click)="not_available($event)" value="1">Space
+                      not available On: </label>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="not_avail">
+                <section id="tabs">
+                  <div class="container">
+                    <div class="row">
+                      <div class="mytabs">
+                        <nav>
+                          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                              role="tab" aria-controls="nav-home" aria-selected="true">Week Days</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                              role="tab" aria-controls="nav-profile" aria-selected="false">Any Dates</a>
+                          </div>
+                        </nav>
+                        <div class="col-12">
+                          <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                              aria-labelledby="nav-home-tab">
+                              <div class="form-row">
+                                <div class="form-group day_checkbox" *ngFor="let day of week_days">
+                                  <div class="checkbox">
+                                    <label><input type="checkbox" value="{{day.id}}" [checked]="day.selected">
+                                      <span class="checkmark"
+                                        (click)="add_new_day(day.id,day.name)">{{day.text}}</span></label>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                              aria-labelledby="nav-profile-tab">
+                              <div class="form-row text-center">
+                                <div class="form-group" style="margin:auto">
+                                  <ngb-datepicker #dp [minDate]=dateRange_From [maxDate]=dateRange_To
+                                    [displayMonths]="1" [dayTemplate]="t">
+                                  </ngb-datepicker>
+
+                                  <ng-template #t let-date="date" let-focused="focused">
+                                    <span class="custom-day" (click)="onDateSelection($event,date)"
+                                      [class.focused]="focused"
+                                      [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                      [class.faded]="isHovered(date) || isInside(date)"
+                                      [class.selected]="isDateSelected(date)" [class.disabled]="isDisabled(date)"
+                                      (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                      {{ date.day }}
+                                    </span>
+                                  </ng-template>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <!--card 7  pricing working -->
+        <div class="card card7">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapsePricing">
+              <h5 class="mb-0">
+                Pricing Details* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapsePricing" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="pricing">
+                <p>Pricing
+                  <span class="help">
+                    <a href="" tooltip="{{ PricingTips }}" placement="right">Need Help <i
+                        class="fa fa-question-circle"></i></a>
+                  </span>
+                </p>
+
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <select id="priceType" class="form-control" (change)="daysHourChange()" formControlName="priceType"
+                      required>
+                      <option selected value="">Choose...</option>
+                      <option value="day">Price / Day</option>
+                      <option value="hour">Price / Hour</option>
+                    </select>
+                    <div
+                      *ngIf="spaceForm.controls['priceType'].invalid && (spaceForm.controls['priceType'].dirty || spaceForm.controls['priceType'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="spaceForm.controls['priceType'].errors.required">
+                        This field is required!
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="number" class="form-control" id="price" placeholder="AUD" formControlName="price">
+                    <div
+                      *ngIf="spaceForm.controls['price'].invalid && (spaceForm.controls['price'].dirty || spaceForm.controls['price'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="spaceForm.controls['price'].errors.required">
+                        This field is required!
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="form-group" *ngIf="daysData === 1">
+                  <label for="minbookingdays" class="minbookTag">Minimum number of days for booking :</label>
+                  <input type="number" class="form-control" id="minbookingdays"
+                    placeholder="Minimum number of days . . ." name="" formControlName="minbookingdays">
+                  <div
+                    *ngIf="spaceForm.controls['minbookingdays'].invalid && (spaceForm.controls['minbookingdays'].dirty || spaceForm.controls['minbookingdays'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['minbookingdays'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="daysData === 0">
+                  <label for="minbookinghours" class="minbookTag">Minimum hours of booking :</label>
+                  <input type="number" class="form-control" id="minbookinghours"
+                    placeholder="Minimum number of hours . . ." formControlName="minbookinghours">
+                  <div
+                    *ngIf="spaceForm.controls['minbookinghours'].invalid && (spaceForm.controls['minbookinghours'].dirty || spaceForm.controls['minbookinghours'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['minbookinghours'].errors.required">
+                      This field is required!
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card 9  Rules to use the space -->
+        <div class="card card9">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseRules">
+              <h5 class="mb-0">
+                Rules of Use <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseRules" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="ruleBox">
+                <p>List any <strong>Rules</strong> or <strong>Restrictions</strong> :
+                  <span class="help">
+                    <a href="" tooltip="{{ RulesOfUseTips }}" placement="right">Need Help <i
+                        class="fa fa-question-circle"></i></a>
+                  </span>
+                </p>
+                <div class="form-group">
+                  <textarea class="form-control" rows="3" id="rulesOfUse"
+                    placeholder="Write if any . . . . . (Max 500 characters) " formControlName="rulesOfUse"></textarea>
+                  <div
+                    *ngIf="spaceForm.controls['rulesOfUse'].invalid && (spaceForm.controls['rulesOfUse'].dirty || spaceForm.controls['rulesOfUse'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="spaceForm.controls['rulesOfUse'].errors.maxlength">
+                      maximum 500 characterss.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--card 8 woking cancel policy  -->
+        <div class="card card8">
+          <div class="card-header">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseCalPolicy">
+              <h5 class="mb-0">
+                Cancellation Policy* <i class="fa fa-angle-up rotate-icon"></i>
+              </h5>
+            </a>
+          </div>
+          <div id="collapseCalPolicy" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="form-group">
+                <label>Cancellation Policy
+                  <span class="help">
+                    <a href="" tooltip="{{ CanPolicyTips }}" placement="right">Need Help <i
+                        class="fa fa-question-circle"></i></a>
+                  </span>
+                </label>
+                <div class="form-check form-check-inline" *ngFor="let can_pol of CanPolicyList">
+                  <input type="radio" id="cancel_policy{{ can_pol.id}}" name="cancel_policy" class="form-check-input"
+                    value="{{ can_pol.id }}" formControlName="cancel_policy">
+                  <div class="col-md-11">
+                    <label class="form-check-label" for="cancel_policy{{ can_pol.id }}">{{can_pol.name}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="mandatory_P">* These fields are mandatory and must be filled in.</p>
+      <div class="submitDIV text-center clearfix p-3">
+        <button type="button" class="btn btn-blue btn_submit" (click)="submitSpace('0')" [disabled]='!spaceForm.valid'
+          [ngClass]="{'ld-over-inverse running': show_save_spinner}">Save
+          Ad
+          <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_save_spinner"></div>
+        </button>
+
+        <button type="button" class="btn btn-blue btn_submit" (click)="submitSpace('1')" [disabled]='!spaceForm.valid'
+          [ngClass]="{'ld-over-inverse running': show_publish_spinner}">Publish
+          Ad
+          <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_publish_spinner"></div>
+        </button>
+        <button type="submit" class="btn btn-blue" [disabled]='!spaceForm.valid'
+          [ngClass]="{'ld-over-inverse running': show_spinner}">
+          Preview Ad
+          <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_spinner"></div>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

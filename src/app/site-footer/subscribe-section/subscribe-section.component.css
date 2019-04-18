@@ -1,0 +1,207 @@
+.subs_row {
+  margin: auto;
+  position: absolute;
+  padding: 25px 0;
+}
+.sub_BOX {
+  width: 100%;
+  background: #4abfb3;
+  height: 130px;
+}
+
+.rightPart {
+  width: 50%;
+  background-color: #f39968;
+  height: 130px;
+  float: right;
+  clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.subsT1 {
+  font-size: 30px;
+  color: white;
+}
+.emailBox {
+  margin: auto;
+}
+.emailBox form {
+  display: -webkit-box;
+  margin-left: 8%;
+}
+.email_feed {
+  font-size: 17px;
+  padding: 9px 0 9px 14px;
+  border: none;
+}
+.btn_subscribe {
+  font-size: 17px;
+  margin-left: 5px;
+  padding: 8px 18px;
+  vertical-align: unset;
+  border-radius: 0;
+}
+
+.btn_subscribe:disabled:hover {
+	opacity: 1 !important;
+	/* pointer-events: auto; */
+	pointer-events: all !important;
+}
+.error {
+  border: 1px solid rgb(223, 62, 62);
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .subs_row {
+    left: 0;
+  }
+  .emailBox,
+  .subPart {
+    padding: 0;
+  }
+  .sub_BOX {
+    background-color: #f39968;
+  }
+  .subsT1 {
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0 20px;
+  }
+  .subs_row {
+    padding: 15px 0 15px 0;
+  }
+  .emailBox form {
+    display: -webkit-box;
+    margin-left: 8%;
+  }
+  .emailBox .form-group {
+    width: 55%;
+  }
+  .email_feed {
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 0 5px 4px;
+  }
+  .btn_subscribe {
+    font-size: 14px;
+    padding: 4px 4px;
+  }
+}
+@media only screen and (max-width: 1112px) {
+  .rightPart {
+    display: none;
+  }
+  .sub_BOX {
+    background: #f39967 !important;
+  }
+  .subsT1 {
+    font-size: 15px;
+  }
+  .email_feed[_ngcontent-c5] {
+    font-size: 14px;
+    padding: 5px 0 5px 6px;
+    margin-right: 5px;
+  }
+  .btn_subscribe[_ngcontent-c5] {
+    font-size: 16px;
+    margin-left: 3px;
+    padding: 2px 5px;
+  }
+  .subs_row .col-md-6 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subs_row[_ngcontent-c5] {
+    margin: auto;
+    position: absolute;
+    padding: 25px 0;
+    display: inline-block;
+    /* margin: 0 auto; */
+    /* width: 100%; */
+    text-align: center;
+    left: 24%;
+  }
+}
+@media only screen and (max-width: 667px) {
+  .subs_row[_ngcontent-c5] {
+    left: 11%;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .subs_row[_ngcontent-c5] {
+    left: 0;
+  }
+  .emailBox[_ngcontent-c5] .form-group[_ngcontent-c5] {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 767px) {
+  /* For ipad: */
+  .sub_BOX {
+    height: 100px;
+  }
+  .subPart {
+    padding-left: 0;
+  }
+  .rightPart {
+    height: 100px;
+    width: 52%;
+  }
+  .subsT1 {
+    font-size: 18px;
+  }
+  .emailBox {
+    padding-right: 8px;
+  }
+  .email_feed {
+    font-size: 14px;
+    padding: 5px 0 5px 6px;
+    margin-right: 5px;
+  }
+  .btn_subscribe {
+    font-size: 16px;
+    margin-left: 3px;
+    padding: 2px 5px;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+  .subsT1 {
+    font-size: 25px;
+    color: white;
+  }
+
+  .col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .email_feed {
+    font-size: 17px;
+    padding: 9px 0 9px 70px;
+  }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1300px) {
+  .col-sm-12 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .subsT1 {
+    font-size: 30px;
+    color: white;
+  }
+}
+@media only screen and (max-device-width: 1023px) {
+  .sub_BOX {
+    width: 100%;
+    background: #f39967;
+    height: 130px;
+  }
+}
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
+  .subsT1 {
+    font-size: 20px;
+  }
+}

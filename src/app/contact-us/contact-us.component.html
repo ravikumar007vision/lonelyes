@@ -1,0 +1,116 @@
+<section class="contact_us_section">
+  <div class="container">
+    <h5 class="color-white text-center mb-5">Connect with Us </h5>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4 color-white">
+        <div class=" social_link">
+          <div class="facebook_box row" (click)="openlink(appData.fb_link)">
+            <div class="col-5">
+              <i class="fa fa-facebook color-white"></i>
+            </div>
+            <div class="col-7">
+              <p>Facebook</p>
+            </div>
+          </div>
+
+          <div class="linkedin_box row" (click)="openlink(appData.linked_link)">
+            <div class="col-5">
+              <i class="fa fa-linkedin color-white"></i>
+            </div>
+            <div class="col-7">
+              <p>LinkedIn</p>
+            </div>
+          </div>
+
+          <div class="twitter_box row" (click)="openlink(appData.twitter_link)">
+            <div class="col-5">
+              <i class="fa fa-twitter color-white"></i>
+            </div>
+            <div class="col-7">
+              <p>Twitter</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4 contactformDIV">
+        <ng-container *ngIf="!enquirySent">
+          <form [formGroup]="contactUS_Form" (ngSubmit)="sendEnquiry()">
+            <div class="form-group ">
+              <input type="text" class="form-control" name="name" placeholder="Your Name *" formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required>
+            </div>
+
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">*Name is required</div>
+              <div *ngIf="f.name.errors.minlength">*Minimum 4 Letters</div>
+            </div>
+
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="sub" placeholder=" Subject *" formControlName="sub"
+                [ngClass]="{ 'is-invalid': submitted && f.sub.errors }" required>
+            </div>
+
+            <div *ngIf="submitted && f.sub.errors" class="invalid-feedback">
+              <div *ngIf="f.sub.errors.required">*Subject is required</div>
+              <div *ngIf="f.sub.errors.minlength">*Minimum 5 characters</div>
+            </div>
+
+
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="email" placeholder=" Email *" formControlName="email"
+                [ngClass]="{ 'is-invalid': (submitted && f.email.errors) || errEmail }" required>
+            </div>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.email">*Invalid Email</div>
+              <div *ngIf="f.email.errors.required">*Email Required</div>
+            </div>
+
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="phone" placeholder=" Phone No *" formControlName="phone"
+                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" required>
+            </div>
+
+            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+              <div *ngIf="f.phone.errors.required">*Phone No is required</div>
+              <div *ngIf="f.phone.errors.minlength">*Minimum 10 digits</div>
+            </div>
+
+            <div class="form-group">
+              <textarea class="form-control" rows="5" name="message" placeholder="Message *" formControlName="message"
+                [ngClass]="{ 'is-invalid': submitted && f.message.errors }" required></textarea>
+            </div>
+            <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+              <div *ngIf="f.message.errors.required">*Message is required</div>
+              <div *ngIf="f.message.errors.minlength">*Minimum 10 Words</div>
+            </div>
+
+            <div class="clearfix mt-3">
+              <button type="submit" class="btn btn-block btn-green"  [ngClass]="{'ld-over-inverse running': spinner}">
+                <span *ngIf="!spinner">Send</span>
+                <span *ngIf="spinner">Sending...</span>
+                <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="spinner"></div>
+              </button>
+            </div>
+          </form>
+          <p class="mandatory color-green">Fields Marked (*) are mandotary to fill.</p>
+        </ng-container>
+        <ng-container *ngIf="enquirySent">
+          <div class="text-center pt-5">
+            <img src="assets/icon/suc.png" width="75" height="75" alt="">
+            <p class="color-white">Message Sent</p>
+            <button class="btn bg-green color-white" [routerLink]="['/']">Go To Home</button>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+
+</section>

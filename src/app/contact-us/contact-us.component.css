@@ -1,0 +1,96 @@
+.contact_us_section {
+  background: url(../../assets/img/unsplash.jpg);
+  background-size: cover;
+}
+
+.contact_us_section .container {
+  padding-top: 60px;
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.social_link .facebook_box,
+.social_link .linkedin_box,
+.social_link .twitter_box {
+  margin-bottom: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.281);
+  border-radius: 6px;
+
+  animation: scaledown 1s linear;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+}
+
+.social_link .facebook_box:hover,
+.social_link .linkedin_box:hover,
+.social_link .twitter_box:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #3677b5;
+
+  animation: scale 1s linear;
+  transform-origin: 50% 50%;
+  animation-fill-mode: forwards;
+}
+
+.social_link .row .col-5 {
+  margin: auto;
+  text-align: right;
+}
+
+.social_link .row .col-7 {
+  margin: auto;
+  text-align: left;
+}
+
+.social_link .fa {
+  font-size: 25px;
+  margin: 10px;
+  border-radius: 50%;
+}
+.facebook_box .fa {
+  padding: 13px 19px;
+  background-color: #4267b2;
+}
+
+.linkedin_box .fa {
+  padding: 13px 15px;
+  background-color: #3677b5;
+}
+
+.twitter_box .fa {
+  padding: 13px 15px;
+  background-color: #4ba1f2;
+}
+
+.social_link p {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.contactformDIV .form-group {
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
+.mandatory {
+  font-size: 13px;
+  font-style: italic;
+}
+
+.invalid-feedback {
+  display: block;
+  margin: 0;
+  font-size: 11px;
+}
+
+@media only screen and (max-width: 767px) {
+  .social_link {
+    display: none;
+  }
+  .container h5 {
+    margin-bottom: 15px !important;
+  }
+  .container .row {
+    padding: 10px 25px;
+  }
+}

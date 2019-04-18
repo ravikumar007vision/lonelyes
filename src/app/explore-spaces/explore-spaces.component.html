@@ -1,0 +1,180 @@
+<section class="space_lisitng">
+  <div class="container">
+    <h4 class="header_txt">Explore Spaces</h4>
+    <div class="customSearch bg-orange">
+      <form [formGroup]="spaceForm" (ngSubmit)="searchSpace(1,1)">
+        <div class="row min_pad m-0">
+          <div class="col-md-9 col-xs-12 p-4">
+            <!-- 1st uppar div -->
+
+            <div class="form-row">
+              <div class="form-group col-md-8 col-sm-6">
+                <input type="text" class="form-control" id="searchText" placeholder="Space title *"
+                  formControlName="searchText">
+              </div>
+
+              <div class="form-group col-md-4 col-sm-6">
+                <select id="spaceType" class="form-control" formControlName="spaceType">
+                  <option selected value="">Space Type...</option>
+                  <option [value]="space.id" *ngFor="let space of SpaceTypes">{{ space.name }}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 2nd lower div -->
+            <div class="form-row mt">
+              <div class="form-group col-md-3 col-sm-6">
+                <select id="inputState" class="form-control" formControlName="inputState"
+                  (change)="stateChange($event.target.value, $event.target.options[$event.target.options.selectedIndex].text)">
+                  <option selected value="">Choose State...</option>
+                  <option [value]="State.id" *ngFor="let State of StateList">{{ State.name }}</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-3 col-sm-6">
+                <select id="inputCity" class="form-control" formControlName="inputCity">
+                  <option selected value=""> Choose City...</option>
+                  <option [value]="city.id" *ngFor="let city of CityList">{{ city.name }}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-2 col-sm-6">
+                <select id="time_base" class="form-control" formControlName="time_base" (change)="daysHourChange()">
+                  <option selected value="">Day/Hr..</option>
+                  <option value="day">Day</option>
+                  <option value="hour">Hour</option>
+                </select>
+              </div>
+              <div class="form-group price_slider col-md-4 col-sm-6">
+                <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" formControlName="price">
+                </ng5-slider>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-xs-12 search_btnBox text-center">
+            <button type="submit" class="btn btn-blue btn_search">SEARCH</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!--------- sorting------- -->
+    <div class="sorting">
+      <div class="row sorting_sec">
+        <div class=" col-6 m-auto lgDIV">
+          <button type="button" class="btn btn_lg" (click)="isGridView = false">List <i
+              class="fa fa-list fa_gp"></i></button>
+          <button type="button" class="btn btn_lg" (click)="isGridView = true">Grid <i
+              class="fa fa-th fa_gp"></i></button>
+        </div>
+        <div class=" col-6 text-right m-auto sortby">
+          <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+          <div class="dis_inline">
+            <select (change)="get_sortedBY($event)">
+              <option selected disabled>Sort by...</option>
+              <option value="id">Recent Spaces</option>
+              <option value="lTh">Price - Low to High</option>
+              <option value="hTl">Price - High to Low</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="resultSection container">
+  <div class="no_result_preview text-center py-5" *ngIf="noResultsFound">
+    <img src="assets/logo/noresults.png" alt="">
+    <h4>No Results Found</h4>
+    <h3 class="color-green">Be the first to share a space <a href="user-dashboard/create-space"><b>here!</b></a></h3>
+  </div>
+
+  <div class="container search-results" *ngIf="SearchResult" infiniteScroll [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+    <!--  list view -->
+    <div class="searchResultList" *ngIf="!isGridView">
+      <div class="row rowList" *ngFor="let space of SearchResult">
+        <div class="col-3 imgLIST">
+          <img src="{{ picURL}}/{{ space.data.owner_id}}/{{space.pic}}" alt=""
+            onerror="this.onerror=null; this.src='assets/img/image.png';">
+        </div>
+        <div class="col-6 detLIST">
+          <h5 class="spacename_List">{{ space.data.title }}</h5>
+          <p class="loc_List mb-0"><i class="fa fa-map-marker pr-1"></i>
+            <span *ngIf="space.data.city != null">{{space.data.city}},</span>
+            <span *ngIf="space.data.city == null">{{space.data.state}},</span>
+            <span> {{space.data.state}} </span>
+            <span>{{space.data.postcode}}</span>
+          </p>
+          <div class="starbox_List starRating">
+
+
+            <ng-template #x let-fill="fill">
+              <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+              </span>
+            </ng-template>
+            <ngb-rating [rate]="space.data?.review[0]?.average | number" [starTemplate]="x" max="5" [readonly]="true">
+            </ngb-rating>
+            <span *ngIf="space.data?.review[0]?.total_review"><b>
+                {{ space.data?.review[0]?.total_review | number }}</b></span>
+            <span *ngIf="!space.data?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+
+          </div>
+        </div>
+        <div class="col-3 m-auto btn-LBox">
+          <div class="btn-LV">
+            <button type="button" class="btn btn-blue" (click)="fetchDeatils(space.data.id)">View <span
+                id="showDT">Details</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Grid View -->
+    <div class="searchResultGrid mt-3" *ngIf="isGridView">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 spacebox_wrapper" *ngFor="let space of SearchResult">
+          <div class="spacebox mb-3">
+            <div class="box8">
+              <img src="{{ picURL}}/{{ space.data.owner_id}}/{{space.pic}}"
+                onerror="this.onerror=null; this.src='assets/img/image.png';">
+              <div class="box-content">
+                <ul class="icon">
+                  <a class="btn btn-green f14 rounded-0" (click)="fetchDeatils(space.data.id)">Click to View </a>
+                </ul>
+              </div>
+            </div>
+
+            <div class="spacebox_info">
+              <h5>{{ space.data.title }}</h5>
+              <p class="loc mb-0"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span *ngIf="space.data.city != null">{{space.data.city}},</span>
+                <span *ngIf="space.data.city == null">{{space.data.state}},</span>
+                <span> {{space.data.state}} </span>
+                <span>{{space.data.postcode}}</span>
+              </p>
+              <div class="starbox starRating">
+
+                <ng-template #x let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                  </span>
+                </ng-template>
+                <ngb-rating [rate]="space.data?.review[0]?.average | number" [starTemplate]="x" max="5"
+                  [readonly]="true"> </ngb-rating>
+                <span *ngIf="space.data?.review[0]?.total_review"><b>
+                    {{ space.data?.review[0]?.total_review | number }}</b></span>
+                <span *ngIf="!space.data?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+              </div>
+              <a type="button" class="btn btn-block btn-green" (click)="fetchDeatils(space.data.id)">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<section id="termNcond_section">
+  <div class="container mt-5" *ngIf="isDataLoaded">
+    <h5 class="text-center my-3">{{pageContent.name}}</h5>
+    <div [innerHTML]="pageContent.content"></div>
+  </div>
+  <div class="container mt-5 text-center" *ngIf="!isDataLoaded">
+    <div style="height:300px">
+      <h6 style="padding-top: 125px"><b>No Content Available</b></h6>
+    </div>
+  </div>
+</section>
+
+<ngx-spinner bdOpacity=0.9 bdColor="#f39868" size="medium" color="#4abfb3" type="ball-clip-rotate-multiple"
+  fullScreen="false">
+  <p style="color: white"> Loading... Please wait</p>
+</ngx-spinner>

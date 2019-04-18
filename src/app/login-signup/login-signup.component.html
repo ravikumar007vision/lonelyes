@@ -1,0 +1,407 @@
+<div class="login_signup_section mt-4">
+  <div class="container">
+    <div class="loginsignup_header text-center">
+      <h3 class="mt-3 color-green">Login/Register</h3>
+      <h6 class="f14">Join our vibrant Lonely Spaces Community and be part of the global space sharing movement.
+        ‘Saving the planet, one lonely space at a time‘</h6>
+    </div>
+    <div class="login-signup_box">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="loginbox">
+            <h4 class="lsT3">Sign in to your account !</h4>
+            <form [formGroup]="loginForm" (ngSubmit)="doLogin($event)">
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Username / Email"
+                  formControlName="username" required>
+                <div
+                  *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="loginForm.controls['username'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Username is required *
+                  </div>
+                  <div *ngIf="loginForm.controls['username'].errors?.pattern">
+                    <i class="fa fa-exclamation-triangle"></i> Username is not valid.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" id="password1" placeholder="Password"
+                  formControlName="password" required>
+                <div
+                  *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="loginForm.controls['password'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Password is required *
+                  </div>
+                  <div *ngIf="loginForm.controls['password'].errors.unmatched">
+                    <i class="fa fa-exclamation-triangle"></i> {{loginForm.controls['password'].errors.unmatched}}. Try
+                    again.
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix">
+                <button type="submit" class="btn btn-block btn_send btn-green"
+                  [ngClass]="{'ld-over-inverse running': show_L_spinner}" [disabled]='!loginForm.valid'>
+                  <span *ngIf="!show_L_spinner">Login</span>
+                  <span *ngIf="show_L_spinner">Logging in...</span>
+                  <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_L_spinner"></div>
+                </button>
+              </div>
+              <p class="forget_P f12 float-right my-3" (click)="openmodal(forgetpswd)">Forgot password? </p>
+            </form>
+
+            <!-- <div class="login-or clearfix">
+              <hr class="hr-or">
+              <span class="span-or">or</span>
+            </div>
+            <div class="row text-center social_login m-0">
+              <div class="col-12 facebook_box px-0 mb-2" (click)="socialSignIn('facebook')">
+                <p class="m"> <i class="fa fa-facebook"></i><b> Login with facebook</b></p>
+              </div>
+              <div class="col-12 google_box py-0" (click)="socialSignIn('google')">
+                <p class="m"> <i class="fa fa-google"></i><b> Login with google</b></p>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="col-md-7 d7">
+          <div class="signupbox">
+            <h4 class="lsT3">Create a new account !</h4>
+
+            <form [formGroup]="registrationFrom" (ngSubmit)="RegisterUser($event)">
+              <div class="form-group fg_fname">
+                <input type="text" class="form-control" name="fname" id="fname" placeholder="First name"
+                  formControlName="fname" required>
+                <div
+                  *ngIf="registrationFrom.controls['fname'].invalid && (registrationFrom.controls['fname'].dirty || registrationFrom.controls['fname'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['fname'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Firstname is required *
+                  </div>
+                </div>
+              </div>
+              <div class="form-group fg_lname">
+                <input type="text" class="form-control" name="lname" id="lname" placeholder="Last name"
+                  formControlName="lname" required>
+                <div
+                  *ngIf="registrationFrom.controls['lname'].invalid && (registrationFrom.controls['lname'].dirty || registrationFrom.controls['lname'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['lname'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Lastname is required *
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="form-group clearfix">
+                <input type="text" class="form-control" name="company" id="company" placeholder="Company Name"
+                  formControlName="company">
+                <div
+                  *ngIf="registrationFrom.controls['company'].invalid && (registrationFrom.controls['company'].dirty || registrationFrom.controls['company'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['company'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Company name is required *
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="form-group">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email"
+                  formControlName="email" required>
+                <div
+                  *ngIf="registrationFrom.controls['email'].invalid && (registrationFrom.controls['email'].dirty || registrationFrom.controls['email'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['email'].errors.required">
+                    <h6><i class="fa fa-exclamation-triangle"></i> Email is required *</h6>
+                  </div>
+                  <div *ngIf="registrationFrom.controls['email'].errors?.pattern">
+                    <i class="fa fa-exclamation-triangle"></i> Email is not valid
+                  </div>
+                  <div *ngIf="registrationFrom.controls['email'].errors.duplicate">
+                    <i class="fa fa-exclamation-triangle"></i> {{registrationFrom.controls['email'].errors.duplicate}}
+                    Try login or use different email.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group /*fg_phone*/">
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone No"
+                  formControlName="phone" required>
+                <div
+                  *ngIf="registrationFrom.controls['phone'].invalid && (registrationFrom.controls['phone'].dirty || registrationFrom.controls['phone'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['phone'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> Phone no. is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group fg_pswd">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password"
+                  (keyup)="onFirstPasswordChange($event)" #password required>
+                <ng2-password-strength-bar [passwordToCheck]="password.value" [barLabel]="barLabel"
+                  [barColors]="myColors"
+                  *ngIf="password.value.length > 5 && registrationFrom.controls['password'].valid ">
+                </ng2-password-strength-bar>
+                <div
+                  *ngIf="registrationFrom.controls['password'].invalid && (registrationFrom.controls['password'].dirty || registrationFrom.controls['password'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['password'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> This field is required.
+                  </div>
+                  <div *ngIf="registrationFrom.controls['password'].errors.minlength">
+                    <i class="fa fa-exclamation-triangle"></i> Password is too short.
+                  </div>
+                  <div *ngIf="registrationFrom.controls['password'].errors.maxlength">
+                    <i class="fa fa-exclamation-triangle"></i> Password is too long.
+                  </div>
+                  <!-- <div *ngIf="registrationFrom.controls['password'].errors.invalid">
+                        Password does not match.
+                    </div> -->
+                </div>
+              </div>
+
+              <div class="form-group fg_cpswd">
+                <input type="password" class="form-control" name="c_password" id="c_password"
+                  placeholder="Confirm Password" formControlName="c_password" required>
+                <div
+                  *ngIf="registrationFrom.controls['c_password'].invalid && (registrationFrom.controls['c_password'].dirty || registrationFrom.controls['c_password'].touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="registrationFrom.controls['c_password'].errors.required">
+                    <i class="fa fa-exclamation-triangle"></i> This field is required.
+                  </div>
+                  <div *ngIf="registrationFrom.controls['c_password'].errors.invalid">
+                    <i class="fa fa-exclamation-triangle"></i> Password does not match.
+                  </div>
+                  <div *ngIf="registrationFrom.controls['c_password'].errors.mismatch">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    {{registrationFrom.controls['c_password'].errors.mismatch}}
+                  </div>
+                  <!-- <div *ngIf="registrationFrom.controls['c_password'].errors.minlength">
+                         Password is too short.
+                    </div> 
+                    <div *ngIf="registrationFrom.controls['c_password'].errors.maxlength"> 
+                         Password is too long.
+                    </div>   -->
+                </div>
+              </div>
+
+              <!-- <div class="form-group clearfix">
+                <label class="labelContainer">
+                  <input type="radio" checked="checked" name="userRole" (change)="chnageRole(3)">I am Space Renter
+                  <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                  <input type="radio" name="userRole" (change)="chnageRole(2)">I am Space Owner
+                  <span class="checkmark"></span>
+                </label>
+              </div> -->
+
+              <div class="form-check clearfix agreeTermC">
+                <label class="form-check-label mb-1" for="check1">
+                  <input type="checkbox" class="form-check-input" id="check1" (change)="tNcChange($event);"
+                    [checked]="tc_val">I
+                  agree to Lonely Spaces <a (click)="openmodal(term_n_cond);getTC()"> Terms of Use</a>
+                </label>
+
+                <div *ngIf="registrationFrom.controls['TnC'].invalid" class="alert alert-danger"
+                  style="margin-left:-20px">
+                  <div *ngIf="registrationFrom.controls['TnC'].errors.custom">
+                    <i class="fa fa-exclamation-triangle"></i> Please accept Terms and Conditions to proceed.
+                  </div>
+
+                </div>
+              </div>
+              <div class="clearfix btn_singup mt-3">
+                <button type="submit" class="btn btn_send btn-green"
+                  [ngClass]="{'ld-over-inverse running': show_R_spinner}" [disabled]='!registrationFrom.valid'>
+                  <span *ngIf="!show_R_spinner">Register</span>
+                  <span *ngIf="show_R_spinner">Registering...</span>
+                  <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_R_spinner"></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- verify email -->
+<ng-template #verifyme let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-exclamation-triangle"></i> Complete your
+      verification! </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="f13">Your Registration is completed. But your account is not activated yet. Please check your email for
+      the
+      confirmation code to activate your account.</p>
+    <form [formGroup]="verifyForm" (ngSubmit)="verifySubmit($event)">
+      <div class="form-group">
+        <input type="text" class="form-control" name="verification_code" id="verification_code"
+          placeholder="Verification Code *" formControlName="verification_code" required>
+        <div
+          *ngIf="verifyForm.controls['verification_code'].invalid && (verifyForm.controls['verification_code'].dirty || verifyForm.controls['verification_code'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="verifyForm.controls['verification_code'].errors.required">
+            <i class="fa fa-exclamation-triangle"></i> verification code is required *
+          </div>
+          <div *ngIf="verifyForm.controls['verification_code'].errors.unmatched">
+            <i class="fa fa-exclamation-triangle"></i> verification code is not valid
+          </div>
+        </div>
+      </div>
+      <p class="color-green f12 ml-1" *ngIf="resend_mail">Verification code sent to your mail. <i
+          class="fa fa-check-circle-o"></i></p>
+      <div class="clearfix px-5 mt-4 mb-2 btn_verify_DIV">
+        <button type="button" class="btn btn-green float-left" (click)="resendMail()"
+          [ngClass]="{'ld-over-inverse running': show_resend_spinner}">
+          <span *ngIf="!show_resend_spinner">Resend</span>
+          <span *ngIf="show_resend_spinner">Sending...</span>
+          <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_resend_spinner"></div>
+        </button>
+        <button type="submit" class="btn btn-green float-right"
+          [ngClass]="{'ld-over-inverse running': show_verify_spinner}" [disabled]='!verifyForm.valid'>
+          <span *ngIf="!show_verify_spinner">Verify</span>
+          <span *ngIf="show_verify_spinner">Verifying...</span>
+          <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_verify_spinner"></div>
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+      
+    </div> -->
+</ng-template>
+
+
+
+
+
+
+<!-- forget password -->
+
+<ng-template #forgetpswd let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="!showTokenSendMsg"><i class="fa fa-exclamation-triangle"></i>
+      Forget your Password!</h4>
+    <h5 class="modal-title" id="modal-basic-title" *ngIf="showTokenSendMsg"><i class="fa fa-check-circle"></i> Submit
+      received Token to reset password</h5>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="hideFirst">
+    <div class="emailFeedDIV" *ngIf="!showTokenSendMsg">
+      <form [formGroup]="forgetForm" (ngSubmit)="forgetUser()">
+        <div class="form-group form-inline">
+          <input type="text" class="form-control col-9" placeholder="Your Email *" name="email" id="email"
+            formControlName="email" [ngClass]="{ 'is-invalid': submittedforgetPSWD && fp.email.errors }" required>
+          <div class="col-3">
+            <button class="btn btn-green w-100" [ngClass]="{'ld-over-inverse running': show_forget_spinner}">
+              <span *ngIf="!show_forget_spinner">Submit</span>
+              <span *ngIf="show_forget_spinner">{{'&nbsp;'}}</span>
+              <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_forget_spinner"></div>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="submittedforgetPSWD && fp.email.errors" class="invalid-feedback">
+          <div *ngIf="fp.email.errors.required">*Email is required</div>
+        </div>
+
+      </form>
+    </div>
+
+
+    <div class="resetpswdDIV" *ngIf="showTokenSendMsg">
+      <div *ngIf="showTokenSendMsg" class="valid-feedback f17 text-center">
+        <div>Token sent. kindly check your email.</div>
+      </div>
+      <form [formGroup]="resetpswdForm" (ngSubmit)="resetpswd()">
+        <div class="form-group">
+          <input type="text" class="form-control" name="email" formControlName="email" disabled>
+        </div>
+        <div class="form-group ">
+          <input type="text" class="form-control" placeholder="Token received in email *" name="token"
+            formControlName="token" [ngClass]="{ 'is-invalid': (submittedReset && resetpd.token.errors) || errToken }"
+            required>
+
+          <div *ngIf="submittedReset && resetpd.token.errors" class="invalid-feedback">
+            <div *ngIf="resetpd.token.errors.required">*Token is required. Check your email.</div>
+          </div>
+          <div class="invalid-feedback" *ngIf="errToken">
+            {{errToken}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="New Password *" name="password"
+            formControlName="password" [ngClass]="{ 'is-invalid': submittedReset && resetpd.password.errors }" required>
+        </div>
+        <div *ngIf="submittedReset && resetpd.password.errors" class="invalid-feedback">
+          <div *ngIf="resetpd.password.errors.required">*Password is required</div>
+          <div *ngIf="resetpd.password.errors.minlength">*Minimum 6 Letters</div>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Confirm password *" name="cpassword"
+            formControlName="cpassword" [ngClass]="{ 'is-invalid': submittedReset && resetpd.cpassword.errors }"
+            required>
+        </div>
+
+
+        <div *ngIf="submittedReset && resetpd.cpassword.errors" class="invalid-feedback">
+          <div *ngIf="resetpd.cpassword.errors.required">*Confirm your Password</div>
+          <div *ngIf="resetpd.cpassword.errors.minlength">*Minimum 6 Letters</div>
+        </div>
+        <div class="invalid-feedback"
+          *ngIf="resetpswdForm.errors?.mismatch && (resetpswdForm.controls['cpassword'].dirty || resetpswdForm.controls['cpassword'].touched)">
+          Passwords don't match.
+        </div>
+        <div class="changePSWD text-center mt-3">
+          <button class="btn btn-block btn-green" [ngClass]="{'ld-over-inverse running': show_reset_spinner}">
+            <span *ngIf="!show_reset_spinner"> Change Password</span>
+            <span *ngIf="show_reset_spinner">{{'&nbsp;'}}</span>
+            <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_reset_spinner"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <div class="valid-feedback text-center f17" *ngIf="successMSG">
+      {{successMSG}} <i class="fa fa-check-circle"></i>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #term_n_cond let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-exclamation-triangle"></i> Terms and Conditions of
+      Use </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body tnc_body">
+    <span [innerHTML]="tncData?.content"></span>
+  </div>
+  <div class="modal-footer" style="border-top: 1px solid #d6d6d6 !important">
+    <button class="btn btn-danger" (click)="tc_clicked(0)">Cancel</button>
+    <button class="btn btn-success btn-tnc" (click)="tc_clicked(1)">Accept and Continue</button>
+  </div>
+</ng-template>

@@ -1,0 +1,281 @@
+.signupbox {
+  padding: 20px 70px;
+}
+
+.loginbox {
+  padding: 20px 50px;
+}
+
+/* ---------login------ */
+
+.loginsignup_header {
+  padding: 10px 0px;
+  margin-bottom: 25px;
+}
+
+.lsT3 {
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.btn_send {
+  font-size: 17px;
+  padding: 10px 35px;
+}
+
+.btn_send:hover {
+  background-color: #f39968;
+}
+
+.forget_P {
+  color: #53aab1;
+}
+
+.forget_P:hover {
+  text-decoration: underline;
+  color: #4abfb3;
+  cursor: pointer;
+}
+
+.facebook_box {
+  background-color: #4267b2;
+  color: white;
+}
+
+.google_box {
+  background-color: #d94830;
+  color: #ffffff;
+}
+
+.facebook_box:hover,
+.google_box:hover {
+  cursor: pointer;
+}
+
+.social_login p {
+  font-size: 14px;
+  margin: 10px;
+}
+
+
+.form-check-label {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* ---register--- */
+
+.fg_fname,
+.fg_pswd,
+.fg-email {
+  width: 48%;
+  float: left;
+}
+
+.fg_lname,
+.fg_cpswd,
+.fg_phone {
+  width: 48%;
+  float: right;
+}
+
+/* The labelContainer */
+
+.labelContainer {
+  /*display: block;*/
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+
+.labelContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+
+.labelContainer:hover input~.checkmark {
+  background-color: #4abfb3;
+}
+
+/* When the radio button is checked, add a blue background */
+
+.labelContainer input:checked~.checkmark {
+  background-color: #4abfb3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+
+.labelContainer input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+
+.labelContainer .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* modal verify email */
+
+.btn_verify_DIV {
+  margin: 18px 0 15px 0;
+  padding: 0 35px;
+}
+
+.btn_verify_DIV .btn {
+  font-size: 16px;
+  padding: 6px 0;
+  width: 45%;
+}
+
+/* .error {
+  border: 1px solid #721c24;
+} */
+
+.agreeTermC a {
+  color: #4abfb3;
+}
+
+.resetpswdDIV .form-group,
+.emailFeedDIV .form-group {
+  margin-bottom: 5px !important;
+}
+
+.emailFeedDIV .blk {
+  padding: 18px 0;
+}
+
+.tnc_body {
+  height: 300px;
+  overflow: auto;
+}
+
+.invalid-feedback {
+  display: block;
+  margin-top: 2px;
+}
+
+.valid-feedback {
+  display: block;
+}
+
+.btn-tnc {
+  background-color: #4abfb3;
+}
+
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+
+  .fg_pswd,
+  .fg_cpswd {
+    width: 98%;
+    float: none;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+
+  /* For mobile phones: */
+  .loginsignup_header {
+    padding: 10px;
+  }
+
+  .signupbox,
+  .loginbox {
+    padding: 10px;
+  }
+
+  .lsT3 {
+    margin-bottom: 16px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .btn_send {
+    padding: 9px 60px;
+  }
+
+  .btn_singup {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+
+  /* For ipad: */
+  .loginbox,
+  .signupbox {
+    padding: 20px 0px;
+  }
+}
+
+@media only screen and (max-device-width: 812px) {
+  .col-md-7 {
+    /* margin-top: 30px; */
+  }
+}
+
+.login-or {
+  position: relative;
+  font-size: 18px;
+  color: #aaa;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.span-or {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  margin-left: -25px;
+  background-color: #fff;
+  width: 50px;
+  text-align: center;
+}
+
+.hr-or {
+  background-color: #cdcdcd;
+  height: 1px;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}

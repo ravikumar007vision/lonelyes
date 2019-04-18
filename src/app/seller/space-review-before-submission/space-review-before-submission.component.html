@@ -1,0 +1,136 @@
+<section id="previewSpaceBeforeSubmission">
+  <div class="space_Header">
+    <h3>Review your Space</h3>
+  </div>
+
+
+
+  <!-- table starts -->
+  <div class="preview_box border-top-0" *ngIf="createSpaceAllData && otherInfo">
+    <div class="text-left row m-0">
+      <div class="col-3">Space Title :</div>
+      <div class="col-9">{{createSpaceData.spaceTitle}}</div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Space Type :</div>
+      <div class="col-9">{{spaceTypeName}}</div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Capacity of Space :</div>
+      <div class="col-9">
+        <span *ngIf="createSpaceData.otherSpaceCapacity == null">{{spaceCapacity}} Persons</span>
+        <span *ngIf="createSpaceData.otherSpaceCapacity != null">{{createSpaceData.otherSpaceCapacity}} Persons</span>
+      </div>
+    </div>
+    <div class="text-left row m-0">
+      <div class="col-3">OverView :</div>
+      <div class="col-9">{{createSpaceData.spaceDescribe}}</div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Address :</div>
+      <div class="col-9">
+        <p class="mb-0"> #{{createSpaceData.inputAddress}}, {{createSpaceData.inputAddress2}}</p>
+        <p class="mb-0">{{cityName}} , {{stateName}} - {{createSpaceData.inputZip}}</p>
+
+      </div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Images :</div>
+      <div class="col-9 space_picture">
+        <div class="row m-0">
+          <ng-container *ngFor="let image of createSpaceFiles">
+            <div class="col-4 d-inline py-1 px-1">
+              <img src="{{ image[2] }}" alt="spacePic">
+            </div>
+          </ng-container>
+          <ng-container *ngIf="inComingFiles.length !== 0">
+            <div class="col-4 mb-1" *ngFor="let inIMG of inComingFiles; let i=index;">
+              <img src="{{picURL}}/{{user.id}}/{{ inIMG }}">
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Amenities :</div>
+      <div class="col-9">
+        <p class="mb-0">{{IncomingAmenityNamesListStr}}</p>
+        <p class="mb-0" *ngIf="showOtherAmenity"><b> Other Amenities:</b> {{createSpaceData.otherAmenities}}</p>
+      </div>
+    </div>
+    <div class="text-left row m-0">
+      <div class="col-3">Availablity :</div>
+      <div class="col-9"><strong>From: </strong> {{createSpaceData.from_date}} <strong> To: </strong>
+        {{createSpaceData.to_date}}</div>
+    </div>
+    <div class="text-left row m-0">
+      <div class="col-3">Space Unavailablity :</div>
+      <div class="col-9">
+        <div style="margin:5px 0">
+          <span class="not_avail_span" *ngFor="let dd of noday">
+          <strong> Day:</strong> {{dd.daytext}} <br>
+
+          </span>
+          <span class="not_avail_span" *ngFor="let dd of nodate">
+           <strong>Date: </strong> {{dd.date}} 
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Pricing Details :</div>
+      <div class="col-9">
+        <h6> <i> Pricing </i>:<strong> ${{createSpaceData.price}}/{{createSpaceData.priceType}}</strong> </h6>
+
+        <h6 *ngIf="createSpaceData.minbookingdays != null && createSpaceData.minbookingdays != 0"> <i> min days to book </i>:<strong>
+            {{createSpaceData.minbookingdays}}</strong>
+        </h6>
+        <h6 *ngIf="createSpaceData.minbookinghours != null && createSpaceData.minbookinghours != '0'"> <i> min hour to book </i>:<strong>
+            {{createSpaceData.minbookinghours}}</strong> </h6>
+      </div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Rules of Use :</div>
+      <div class="col-9">{{createSpaceData.rulesOfUse}}</div>
+    </div>
+
+    <div class="text-left row m-0">
+      <div class="col-3">Cancellation Policy :</div>
+      <div class="col-9">{{canPolicyDetail}}</div>
+    </div>
+
+  </div>
+  <div class="btn_box text-center py-3">
+    <div class="row">
+    <div class="col-md-8" *ngIf = "modify_route!=='1'">
+    <button class="btn btn-blue" [ngClass]="{'ld-over-inverse running': show_save_spinner}" (click)="saveSpace()">Save Ad
+      <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_save_spinner"></div>
+    </button>
+    <button class="btn btn-blue" [ngClass]="{'ld-over-inverse running': show_submit_spinner}" (click)="submitSpace()">Publish Ad
+      <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_submit_spinner"></div>
+    </button>
+  </div>
+  <div class="col-md-8" *ngIf = "modify_route =='1'">
+    <button class="btn btn-blue btn_submit" (click)="onSubmit('0')"  [ngClass]="{'ld-over-inverse running': show_save_spinner}">Save
+        Ad
+        <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_save_spinner"></div>
+      </button>
+
+      <button class="btn btn-blue btn_submit" (click)="onSubmit('1')"  [ngClass]="{'ld-over-inverse running': show_publish_spinner}">Publish 
+        Ad
+        <div class="ld ld-spinner ld-clock ld-spin-fast" *ngIf="show_publish_spinner"></div>
+      </button>
+    </div>
+    <div class="col-md-4">
+    <button (click)="goback()" class="btn btn-blue">Go Back</button>
+  </div>
+</div>
+</div>
+</section>

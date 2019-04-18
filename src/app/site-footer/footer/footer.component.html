@@ -1,0 +1,61 @@
+<div class="footer">
+    <div class="container f_c">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12  hide_this" *ngIf="appData">
+                <h4 class="hT">The Lonely Spaces Family</h4>
+                <img src="{{appData.logo_url}}{{appData.logo}}" alt="site_logo" class="ft_img1">
+                <p class="ft_p1">Join the lonely spaces family by sharing and connecting with others. Repurpose your
+                    lonely spaces and bring joy to others by renting your underutilized or unused spaces.</p>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-12  qT">
+                <h4 class="hT">Quick Links</h4>
+                <h6 class="qLink" (click)="gotolink('my_space')">My Spaces</h6>
+                <h6 class="qLink" (click)="gotolink('ad_prog')">Advocate Program</h6>
+                <h6 class="qLink" (click)="gotolink('support')">Support</h6>
+                <h6 class="qLink" (click)="gotolink('services')">Services</h6>
+                <h6 class="qLink" (click)="gotolink('press_media')">Press/Media Kit</h6>
+                <h6 class="qLink" (click)="gotolink('careers')">Careers at Lonely Spaces</h6>
+
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-12  contact_us" *ngIf="appData">
+                <h4 class="hT">Contact Us</h4>
+                <p class="cont_p"> <i class="fa fa-map-marker f16" aria-hidden="true"></i><b> Headquarters</b>
+                    <br>{{appData.address_line_1}}</p>
+                <p class="cont_p"><i class="fa fa-phone f16" aria-hidden="true"></i> {{appData.phone}}</p>
+                <p class="cont_p"><i class="fa fa-envelope-o f16" aria-hidden="true"></i> {{appData.admin_email}}</p>
+            </div>
+
+            <div class="col-md-3 col-xs-12 sc_media">
+                <!-- <h4 class="hT">Social Media</h4>
+                <div class="row social_share">
+                    <div class="col sc" (click)= "openlink(appData.fb_link)">
+                        <div class="sc_wrapper">
+                            <i class="fa fa-facebook fab_sc" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col sc">
+                        <div class="sc_wrapper" (click)= "openlink(appData.twitter_link)">
+                            <i class="fa fa-twitter fab_sc" aria-hidden="true"></i>
+                        </div>
+                    </div> -->
+
+                <!-- <div class="col sc">
+                        <div class="sc_wrapper">
+                            <i class="fa fa-instagram fab_sc" aria-hidden="true"></i>
+                        </div>
+                    </div> -->
+                <!-- <div class="col sc">
+                        <div class="sc_wrapper" (click)= "openlink(appData.linked_link)">
+                            <i class="fa fa-linkedin fab_sc" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="store">
+                    <h4 class="app-download hT">App Download</h4>
+                    <img src="assets/logo/google-play-badge.svg" alt="google_store" class="appstore googleTag">
+                    <img src="assets/logo/apple_badge.svg" alt="apple_store" class="appstore appleTag">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

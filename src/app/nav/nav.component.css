@@ -1,0 +1,125 @@
+.navCont {
+  padding-left: 0;
+}
+.navbar-brand {
+  color: #fff;
+  font-weight: 600;
+}
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.navbar-brand:hover,
+.nav-link:hover {
+  color: #091d36 !important;
+}
+.navbar {
+  width: 70%;
+  display: inline-flex;
+  height: 56px;
+}
+
+.nav-link.active,
+.navbar-brand.active {
+  color: #091d36 !important;
+}
+
+.newBox {
+  background-color: #4abfb3;
+}
+
+.design {
+  float: right;
+  padding: 16px 0;
+  height: 56px;
+  background-color: #f39968;
+  width: 30%;
+  clip-path: polygon(18% 0, 101% 0%, 101% 102%, 0 101%);
+}
+.submitBox {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+}
+.submitBox a {
+  color: #ffffff;
+}
+
+.navSec {
+  position: absolute;
+  width: 100%;
+  bottom: -25px;
+}
+.container {
+  width: 100%;
+  padding: 0;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  /* .container{
+		padding: 0;
+	} */
+  .navbar {
+    width: 100%;
+    padding: 11px 0px;
+  }
+  .navbar-brand {
+    margin-left: 15px;
+  }
+  .navbar-toggler {
+    margin-right: 15px;
+  }
+  .design {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .navSec {
+    position: absolute;
+    width: 100%;
+    bottom: -33px;
+  }
+  .submitBox {
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+    margin-left: 10px;
+  }
+  .navbar-collapse {
+    background-color: #4abfb3;
+    z-index: 1;
+    margin-top: 5px;
+  }
+  .nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    padding-left: 15px;
+  }
+  .navbar-nav {
+    border-top: 1px solid white;
+  }
+}
+@media only screen and (max-device-width: 768px) and (orientation: landscape) {
+  .submitBox {
+    font-size: 15px;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .container {
+    max-width: 590px;
+    padding: 0;
+  }
+}
+@media (min-width: 769px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) and (orientation: portrait) {
+  .container {
+    max-width: 720px;
+  }
+}

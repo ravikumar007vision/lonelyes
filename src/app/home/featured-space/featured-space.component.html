@@ -1,0 +1,45 @@
+<div class="featuredspace">
+	<div class="container">
+		<div class="rowHeader">
+			<h2>SPACES WE LOVE</h2>
+		</div>
+		<div class="featuredboxGrid">
+			<div class="row ftrbox">
+				<div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let fs of FeaturedSpaces">
+					<div class="spacebox">
+						<!-- <div class="box8" (mouseover)="onMouseOver(fs)" (mouseout)="onMouseOut()"> -->
+						<div class="box8">
+							<img src="{{ picURL}}/{{ fs.data.owner_id}}/{{fs.pic}}" alt=""
+								onerror="this.onerror=null; this.src='assets/img/image.png';">
+							<div class="box-content">
+								<ul class="icon">
+									<a class="btn btn-green f14 rounded-0" (click)="showSpace(fs.data.id)">Click to View </a>
+								</ul>
+							</div>
+						</div>
+
+						<div class="spacebox_wrapper">
+							<h5 class="fetured_T"> {{ fs.data.title }}</h5>
+							<h6 class="loc mb-0"><i class="fa fa-map-marker"></i>{{fs.data.cityname}}, {{fs.data.statename}}
+								{{fs.data.postcode}}</h6>
+							<div class="starbox starRating">
+
+								<ng-template #x let-fill="fill">
+									<span class="star" [class.full]="fill === 100">
+										<span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+									</span>
+								</ng-template>
+								<ngb-rating [rate]="fs.data?.review[0]?.average | number" [starTemplate]="x" max="5" [readonly]="true">
+								</ngb-rating>
+								<span *ngIf="fs.data?.review[0]?.total_review" class="tot_rev"><b>
+										{{ fs.data?.review[0]?.total_review | number }}</b></span>
+								<span *ngIf="!fs.data?.review[0]?.total_review" class="tot_rev"><b> {{ '0' }}</b></span>
+							</div>
+							<a type="button" class="btn btn-block btn-green" (click)="showSpace(fs.data.id)">View Details</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

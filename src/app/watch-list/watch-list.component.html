@@ -1,0 +1,80 @@
+<!--------- top section-------->
+<div class="watchlist">
+  <div class="container cont_Watch">
+    <div class="row watchlist_header">
+      <div class="col-md-6 w50">
+        <h3 class="mrT1">My Watchlist</h3>
+      </div>
+      <!-- <div class="col-md-6 col_6 w50">
+        <div class="dropdown sorting_type">
+          <button class="btn dropdown-toggle btn_sort" type="button" data-toggle="dropdown">Sort by
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li class="sort_droptype"><a href="#">Low to High $</a></li>
+            <li class="sort_droptype"><a href="#">High to Low $ </a></li>
+            <li class="sort_droptype"><a href="#">Availability</a></li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+
+
+    <!-- middle section -->
+    <div class="watchlist_box">
+      <div *ngIf="WatchList == ''">
+        <h5 class="no_record_found"><i class="fa fa-exclamation-triangle"></i> No Record Found</h5>
+      </div>
+      <div class="row ftrbox" *ngIf="WatchList != ''">
+        <div class="col-md-3 px-3" *ngFor="let item of WatchList | slice:slicei:slicea; let i= index;">
+          <div class="spacebox_wrapper">
+            <div class="imagebox">
+              <img src="{{ picURL}}/{{ item.data.owner_id}}/{{item.pic}}">
+              <i class="fa fa-heart color-red" ngbTooltip="Remove" (click)="removeFromWishList(item.data.id)"></i>
+            </div>
+            <div class="space_box">
+              <h5>{{item.data.title}}</h5>
+              <p class="loc"><i class="fa fa-map-marker pr-1"></i>
+                <span *ngIf="item.data.city != null">{{item.data.city}},</span>
+                <span *ngIf="item.data.city == null">{{item.data.state}},</span>
+                <span> {{item.data.state}} </span>
+                <span>{{item.data.postcode}}</span>
+              </p>
+              <div class="starbox starRating">
+                <ng-template #x let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                  </span>
+                </ng-template>
+                <ngb-rating [rate]="item?.data?.review[0]?.average | number" [starTemplate]="x" max="5"
+                  [readonly]="true">
+                </ngb-rating>
+                <span *ngIf="item?.data?.review[0]?.total_review" class="f13"><b>
+                    {{ item?.data?.review[0]?.total_review | number }}</b></span>
+                <span *ngIf="!item?.data?.review[0]?.total_review" class="f13"><b> {{ '0' }}</b></span>
+              </div>
+              <button type="button" class="btn btn-block btn-green btn_view" (click)="fetchDeatils(item.data.id)">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- lower section -->
+
+    <div class="spaceList_footer" *ngIf="lastpage > 1">
+      <div class="btn-group pageToggle">
+        <button type="button" class="btnCLK" (click)="mLeft()"><i class="fa fa-fast-backward"
+            aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK" (click)="fLeft()" [disabled]="slicei === 0"><i class="fa fa-step-backward"
+            aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK">Page : {{page}}</button>
+        <button type="button" class="btnCLK" (click)="fRight()" [disabled]="slicea > WatchList.length"><i
+            class="fa fa-step-forward" aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK" (click)="mRight()"><i class="fa fa-fast-forward"
+            aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+  </div>
+</div>

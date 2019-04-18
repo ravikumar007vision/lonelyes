@@ -1,0 +1,185 @@
+.small_beauty_house_slider {
+  background-image: url("/assets/bc_img/space-listing.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+.small_beauty_house_slider h4 {
+  padding: 80px 0 50px 0;
+  font-size: 31px;
+}
+
+.top_bar .row {
+  border: 1px solid rgba(95, 95, 95, 0.39);
+  border-radius: 6px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background: #4abfb3;
+}
+
+.all_reviews .main_row {
+  border: 1px solid rgba(95, 95, 95, 0.39);
+  border-top: 0px;
+  margin-bottom: 15px;
+  padding-top: 15px;
+}
+
+.single_review {
+  margin: 0px 16px 16px 16px;
+  border-radius: 6px;
+  border: 1px solid #d0c9c9;
+  width: 100%;
+  background-color: #f39868;
+}
+.single_review_header {
+  padding: 8px 0;
+  margin-left: 14px;
+  /* position: relative; */
+}
+/* .replyIcon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+} */
+.reviewer_info {
+  margin: 0 0px 0 25px;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.reviewer_img {
+  display: inline-flex;
+}
+
+.reviewer_img img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.starbox {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.starbox .star {
+  font-size: 16px;
+}
+
+.single_review_text p {
+  padding: 6px 15px;
+  font-size: 14px;
+}
+
+/*--------------------- lower section ---------------------*/
+.spaceList_footer {
+  margin-bottom: 16px;
+}
+
+.btnCLK {
+  color: white;
+  background-color: #4abfb3;
+  margin: 0 5px;
+  border: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/*--------------- similar featured ad-----------------*/
+
+.spacebox {
+  margin-bottom: 25px;
+  background-color: #f3f3f3;
+}
+
+.imagebox img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.imagebox img:hover {
+  cursor: pointer;
+}
+
+.btn_view {
+  background-color: #4abfb3;
+  color: white;
+  border-radius: 0px;
+  font-size: 18px;
+}
+.btn_view:hover {
+  background-color: #f39968;
+}
+
+.fetured_T {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px 0 3px 0;
+  padding-left: 7px;
+  max-height: 33px;
+  overflow: hidden;
+}
+
+.loc {
+  font-size: 13px;
+  font-style: italic;
+  padding-left: 7px;
+  margin-bottom: 0;
+  max-height: 30px;
+  overflow: hidden;
+  color: dimgray;
+}
+
+.starbox {
+  font-size: 14px;
+  margin: 3px 0 2px 7px;
+}
+
+.fa {
+  padding-right: 5px;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .single_review{
+    margin: 0px 12px 20px 12px;
+  }
+  .space_name {
+    margin-top: 18px !important;
+    text-align: center;
+  }
+  .space_rating h5 {
+    padding: 5px 0 !important;
+  }
+  .space_rating .btn {
+    font-size: 14px !important;
+    padding: 3px 7px !important;
+  }
+}
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+  /* For ipad: */
+  .top_bar .row {
+    padding: 10px 0 !important;
+  }
+  .space_name {
+    text-align: center;
+  }
+  .space_name h5 {
+    margin-bottom: 0;
+  }
+
+  .space_rating h5 {
+    padding: 5px 0 !important;
+  }
+  .space_rating .btn {
+    font-size: 14px !important;
+    padding: 3px 7px !important;
+  }
+}
+
+.black-overlay {
+  position: absolute !important;
+}

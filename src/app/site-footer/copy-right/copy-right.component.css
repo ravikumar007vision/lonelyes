@@ -1,0 +1,25 @@
+.footerlast{
+	background-color: #000000;
+	color: white;
+}
+.fl_T1{
+    padding: 15px;
+    font-size: 14px;	
+}
+.term_DIV{
+    text-align: right;
+}
+.term_DIV a{
+    color: white;
+}
+
+@media only screen and (max-width:620px) {
+	/* For mobile phones: */
+    .conatiner{
+        text-align: center;
+    }
+    .fl_T1, .term_DIV{
+        font-size: 12px;
+        text-align: center;	
+    }
+}

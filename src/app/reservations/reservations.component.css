@@ -1,0 +1,136 @@
+.reservation_cont {
+  padding: 0;
+}
+.reservation_header {
+  background-color: #f39968;
+  margin: 0;
+}
+.col_6 {
+  margin: auto;
+}
+.mrT1 {
+  margin-bottom: 0;
+  padding: 15px 10px;
+  color: white;
+  /* color: #091d36; */
+}
+
+.sorting_type {
+  text-align: right;
+}
+.btn_sort {
+  background-color: #091d36;
+  color: white;
+  font-weight: 600;
+}
+
+.actionICON .fa {
+  margin: 0 2px;
+  font-size: 16px;
+}
+.actionICON .fa:hover {
+  font-size: 20px;
+}
+.popover-header {
+  text-align: center;
+}
+
+/* -----------------------table--------------------------- */
+.table-blue {
+  background-color: rgba(9, 29, 54, 0.188);
+}
+.tbl_header {
+  color: #091d36;
+}
+.table td,
+.table th {
+  padding: 10px;
+}
+.btn_choose {
+  padding: 2px 9px;
+  font-size: 14px;
+}
+.noReservation img{
+  height: 130px;
+  width: 125px;
+  margin-bottom: 15px;
+}
+
+
+/*--------------------- lower section ---------------------*/
+.spaceList_footer {
+  background-color: #091d36;
+  margin: 0;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  text-align: center;
+}
+.pageToggle {
+  margin: 20px;
+}
+.btnCLK {
+  color: white;
+  background-color: #4abfb3;
+  margin: 0 5px;
+  border: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .mrT1 {
+    font-size: 17px;
+    margin: 0;
+    padding: 15px 0px;
+    font-weight: 600;
+  }
+  .btn_sort {
+    font-size: 14px;
+  }
+  .w50 {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+  /* For ipad: */
+  .mrT1 {
+    padding: 13px 10px;
+    font-size: 21px;
+  }
+  .btn_sort {
+    font-size: 13px;
+  }
+  .table th {
+    padding: 7px;
+    /* font-size: 12px */
+  }
+  .table td {
+    padding: 7px;
+    /* font-size: 11px */
+  }
+  li a {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .reservation_header {
+    margin-top: 30px;
+    background-color: #f39968;
+  }
+}
+
+.green {
+  color: #4abfb3;
+}
+.blue {
+  color: #091d36;
+}
+.red {
+  color: red;
+}
+modal-header {
+  background-color: #4abfb3;
+}
+

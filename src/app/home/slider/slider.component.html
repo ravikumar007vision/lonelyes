@@ -1,0 +1,95 @@
+<div class="slider">
+	<div class="container">
+		<div class="big_logo text-center" *ngIf="appData">
+			<img src="{{appData.logo_url}}{{appData.logo}}">
+		</div>
+		<div class="slogan text-center text-white mb-3">
+			<h2>Relove, Reuse, Reimagine</h2>
+		</div>
+		<form [formGroup]="spaceForm" (ngSubmit)="searchnow()">
+			<div class="searchbox text-center">
+				<div class="search_content">
+					<div class="row mx-0">
+						<span class="col-10 m-auto p-0">
+							<input type="text" placeholder="Search Keywords E.g. garden" formControlName="searchText">
+						</span>
+						<span class="col-2">
+							<button class="search_submit"><i class="fa fa-search fa-3x" style="color: grey"></i></button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="result_box">
+			<ul *ngIf="SearchResults" class="list-unstyled text-left mb-0">
+				<li *ngFor="let space of SearchResults" (click)="gotoSpace(space.id)">{{space.title}}</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="about_section">
+	<div class="container">
+		<div class="about_wrapper my-4">
+			<div class="about_header">
+				<div class="header_tag">
+					<h2 class="text-center py-2 mb-2 color-green">OUR PHILOSOPHY</h2>
+				</div>
+				<div class="row text-center">
+					<div class="col-md-4 box">
+						<img src="assets/img/c2.jpg" alt="">
+						<h5>Relove</h5>
+						<div class="about_content">
+							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic ut voluptatibus neque, deserunt magni
+								distinctioatque sit vel</p>
+						</div>
+					</div>
+					<div class="col-md-4 box">
+						<img src="assets/img/c2.jpg" alt="">
+						<h5>Reuse</h5>
+						<div class="about_content">
+							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic ut voluptatibus neque, deserunt magni
+								distinctioatque sit </p>
+						</div>
+					</div>
+					<div class="col-md-4 box">
+						<img src="assets/img/c2.jpg" alt="">
+						<h5>Reimagine</h5>
+						<div class="about_content">
+							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic ut voluptatibus neque, deserunt magni
+								distinctioatque </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <input type="text"  placeholder="Explore Spaces . . ." formControlName="searchText" (input)="onSearchChange($event.target.value)"> -->

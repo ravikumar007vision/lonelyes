@@ -1,0 +1,61 @@
+<div class="userdashboard">
+  <div class="small_beauty_house_slider">
+    <div class="container">
+      <h4>My Account</h4>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row user-dash">
+      <div class="col-md-4">
+        <div id="sidebar">
+          <div class="list-group panel">
+            <a class="list-group-item collapsed box" data-parent="#sidebar" [routerLink]="['user-profile']"
+              routerLinkActive="active"><i class="fa fa-user"></i> <span class="hidden-sm-down"> My Profile</span></a>
+
+            <a class="list-group-item collapsed box" data-parent="#sidebar" *ngIf="user?.role == 3 || user?.role == 4" [routerLink]="['reservations']"
+              routerLinkActive="active"><i class="fa fa-calendar-check-o"></i>
+              <span class="hidden-sm-down"> My Reservations</span></a>
+            <a class="list-group-item collapsed box" data-parent="#sidebar" *ngIf="user?.role == 2 || user?.role == 4" [routerLink]="['bookings']"
+              routerLinkActive="active"><i class="fa fa-calendar"></i>
+              <span class="hidden-sm-down"> My Space Bookings</span></a>
+
+            <a class="list-group-item collapsed box" data-parent="#sidebar" (click)="chat()"><i class="fa fa-comments"></i>
+              <span class="hidden-sm-down"> Messages</span></a>
+
+            <a class="list-group-item collapsed box" data-parent="#sidebar" [routerLink]="['watchlist']" routerLinkActive="active"><i
+                class="fa fa-bookmark" aria-hidden="true"></i>
+              <span class="hidden-sm-down"> Watchlist</span></a>
+
+            <a href="#menu3" *ngIf="user?.role == 2 || user?.role == 4" class="list-group-item collapsed box" data-toggle="collapse" data-parent="#sidebar"
+              aria-expanded="false"><i class="fa fa-user"></i> <span class="hidden-sm-down"> Space Management</span>
+              <i class="fa fa-caret-up sbC float-right"></i></a>
+
+            <div class="collapse" id="menu3">
+              <a class="list-group-item submenu" data-parent="#menu3" [routerLink]="['create-space']" routerLinkActive="active"><i
+                  class="fa fa-plus-circle submenuIC"></i>
+                Create New Space</a>
+              <a class="list-group-item submenu" data-parent="#menu3" [routerLink]="['seller-space-listing']"
+                routerLinkActive="active"><i class="fa fa-list-ul submenuIC"></i>
+                Space Listing</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- <div class="ver_sec text-center">
+          <p class="f11">GET VERIFIED AND BUILD TRUST IN THE LONELY SPACES COMMUNITY. VERIFICATION ENSURES THAT ALL
+            SPACE RENTERS AND SPACE OWNERS ARE PART OF A SAFE AND SECURE COMMUNITY. GET VERIFIED NOW</p>
+          <div class="btn">
+            <button type="button" class="btn  btn_verify" (click)="getVerify()">Get Verified Now</button>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- right side -->
+      <div class="col-md-8">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

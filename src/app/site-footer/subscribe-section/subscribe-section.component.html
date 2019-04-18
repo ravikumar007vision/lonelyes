@@ -1,0 +1,44 @@
+<!-- <div class="subscribe">
+  <div class="sub_BOX">
+    <div class="rightPart">
+    </div>
+    <div class="container">
+      <div class="row subs_row">
+        <div class="col-md-6 subPart">
+          <h2 class="subsT1">Stay Updated on What's happening on Lonely Spaces</h2>
+        </div>
+        <div class="col-md-6 text-center emailBox">
+          <div>
+            <input type="text" placeholder="*Enter your Email..." class="email_feed">
+            <button type="button" class="btn btn_subscribe">Subscribe Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div> -->
+
+
+<div class="subscribe">
+  <div class="sub_BOX">
+    <div class="rightPart">
+    </div>
+    <div class="container">
+      <div class="row subs_row">
+        <div class="col-md-6 col-sm-12 col-xs-12 subPart">
+          <h2 class="subsT1">Stay Updated on What's happening on Lonely Spaces</h2>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 emailBox">
+          <form [formGroup]="subscribeForm" (ngSubmit)="subscribe($event)">
+            <div class="form-group mb-0">
+              <input type="text" formControlName="email" name="email" placeholder="*Enter your Email..."
+                class="email_feed" [ngClass]="{'error': !subscribeForm.valid && subscribeForm.controls.email.dirty}">
+            </div>
+            <button type="submit" class="btn btn-blue btn_subscribe" [disabled]="subscribeForm.invalid">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

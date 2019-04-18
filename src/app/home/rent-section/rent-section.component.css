@@ -1,0 +1,53 @@
+/* .rent.image {
+  height: 117px;
+  background-image: url("/assets/img/rent.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: auto;
+} */
+.rent_section {
+  background-color: #4abfb3f2;
+  margin-top: 25px;
+}
+.rentTag {
+  padding: 38px 0px;
+}
+.rentBTN {
+  margin: auto;
+}
+.rent_T1 {
+  color: white;
+  font-size: 29px;
+  margin-bottom: 0;
+}
+.btn_rent_submit {
+  padding: 7px 55px;
+  background-color: #f39968;
+  color: white;
+  font-size: 17px;
+  border-radius: 0;
+  font-weight: 600;
+}
+
+.btn_rent_submit:hover {
+  background-color: #091d36;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .rentBTN {
+    margin-top: 20px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .rent_T1 {
+    font-size: 27px;
+  }
+}
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+  /* For ipad: */
+  .rentTag {
+    padding: 25px 0px;
+  }
+}

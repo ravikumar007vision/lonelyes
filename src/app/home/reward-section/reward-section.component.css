@@ -1,0 +1,117 @@
+.rewardsection {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.img_part {
+  background-image: url("/assets/img/reward.jpg");
+  /* background-image: url("/assets/bc_img/srch_cat/c7.jpg"); */
+  background-position: center;
+  background-size: cover;
+}
+
+.rdT1,
+.srchT1 {
+  color: #4abfb3;
+  font-size: 30px;
+}
+.rdT2 {
+  color: #091d36;
+  font-size: 38px;
+}
+.pMT,
+.rdSec {
+  font-size: 14px;
+}
+
+.btn_rew {
+  text-align: center;
+}
+.reward_btn {
+  padding: 12px 60px;
+  background-color: #f39968;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 50px;
+  color: white;
+  border-radius: 0;
+}
+
+.reward_btn:hover {
+  background-color: #091d36;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .rewardsection {
+    /* background-color: #f3f3f3; */
+    margin-top: 0;
+  }
+  .img_part {
+    display: none;
+  }
+  .rdT1 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 15px;
+  }
+  .rdT2 {
+    font-size: 17px;
+  }
+
+  .btn_rew {
+    text-align: center;
+  }
+  .reward_btn {
+    padding: 10px 45px;
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* For mobile phones: */
+  .rewardsection {
+    /* background-color: #f3f3f3; */
+    margin-top: 0;
+  }
+  .img_part {
+    display: none;
+  }
+  .rewardsection {
+    /* background-position: center; */
+    /* background-size: cover; */
+    width: 100%;
+    position: relative;
+    background: #000;
+    opacity: 0.8;
+  }
+
+  .rewardsection::before {
+    position: absolute;
+    height: 100%;
+    content: " ";
+    background: url(/assets/img/reward.jpg);
+    opacity: 0.2;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+  }
+
+  .rdT1 {
+    color: #fff;
+    font-size: 20px;
+  }
+  .btn_rew {
+    text-align: center;
+    padding: 15px 0px;
+  }
+
+  .rdT2 {
+    color: #fff;
+  }
+  .pMT,
+  .rdSec {
+    color: #fff;
+  }
+}

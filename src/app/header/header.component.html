@@ -1,0 +1,158 @@
+<div class="header">
+    <div class="top_nav bg-green color-white f15 p-2">
+        <div class="container">
+            <div class="row topbar">
+                <div class="col userlogin text-right f600">
+                    <div *ngIf="currentUser; then NOTfirst else firstTIME"></div>
+                    <ng-template #NOTfirst>
+                        <div class="d-inline msg" [ngbPopover]="popContent" placement="bottom">
+                            <i class="fa fa-bell f19"></i>
+                            <span class="badge" *ngIf="unread_notification_count*1 > 0"> {{ unread_notification_count }}
+                            </span>
+                        </div>
+                        <ng-template #popContent>
+                            <ul class="list-group">
+                                <li class="list-group-item" [routerLink]="['/chat']">
+                                    <i class="fa fa-envelope-o f13"></i> Incoming Messages
+                                    <span
+                                        class="badge bg-orange color-white float-right f12 ml-2">{{ unread_msg_count }}</span>
+                                </li>
+                                <ng-container *ngIf="NotificationList">
+                                    <ng-container *ngFor="let notification of NotificationList">
+                                        <!-- space booked -->
+                                        <li class="list-group-item" *ngIf="notification.type_value == 1" (click)="goto(1)">
+                                            Your space <b>"{{ doTrim(notification?.spacename?.title,35) }}" </b> has
+                                            been booked <i class="fa fa-check-circle-o green float-right f18 p-0"
+                                                style="margin-top:-9px"></i>
+                                        </li>
+
+                                        <!-- booking approved -->
+                                        <li class="list-group-item" *ngIf="notification.type_value == 2" (click)="goto(2)">
+                                            Seller has <b>approved</b> your booking for
+                                            <b> "{{ doTrim(notification?.spacename?.title,35) }}" </b>
+                                            <i class="fa fa-check-circle-o green float-right f18 p-0"
+                                                style="margin-top:-9px"></i>
+                                        </li>
+
+                                        <!-- booking rejected -->
+                                        <li class="list-group-item" *ngIf="notification.type_value == 3" (click)="goto(3)">
+                                            Seller has <b>rejected</b> your booking for<b>
+                                                "{{ doTrim(notification?.spacename?.title,35) }}" </b>
+                                            <i class="fa fa-ban red float-right f18 p-0" style="margin-top:-9px"></i>
+                                        </li>
+
+                                        <!--buyer did space rating  -->
+                                        <li class="list-group-item" *ngIf="notification.type_value == 9">
+                                            Someone has <b>gave rating</b> to your space <b>
+                                                "{{ doTrim(notification?.spacename?.title,35) }}" </b>
+                                            <i class="fa fa-star-o blue float-right f18 p-0"
+                                                style="margin-top:-9px"></i>
+                                        </li>
+
+                                    </ng-container>
+                                </ng-container>
+                            </ul>
+                        </ng-template>
+
+                        <span id="welcome"> Welcome</span>
+                        <i class="fa fa-user-circle-o pl-0 pr-1 ml-2 f18" *ngIf="!showdp" (click)="gotoProfile()"></i>
+                        <img src="{{ profile_pic }}" alt="" (click)="gotoProfile()" *ngIf="showdp" class="profile_pic">
+                        <ul class="nav d-inline-block align-middle">
+                            <li class="nav-item dropdown ml-auto">
+                                <a class="nav-link dropdown-toggle p-0 color-white" data-toggle="dropdown" href="#"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{currentUser.fname}}
+                                </a>
+                                <div class="dropdown-menu dropdownProfile f600 bg-green">
+                                    <a class="dropdown-item" [routerLink]="['/user-dashboard']">
+                                        <i class="fa fa-cogs"></i>
+                                        Dashboard
+                                    </a>
+                                    <hr>
+                                    <a class="dropdown-item" [routerLink]="['/chat']">
+                                        <i class="fa fa-comments"></i>
+                                        My Messages
+                                    </a>
+                                    <hr>
+                                    <a class="dropdown-item" [routerLink]="['/user-dashboard/watchlist']">
+                                        <i class="fa fa-bookmark"></i>
+                                        My Watchlist
+                                    </a>
+                                    <hr>
+                                    <a class="dropdown-item" (click)="logout()">
+                                        <i class="fa fa-sign-out "></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </ng-template>
+                    <ng-template #firstTIME>
+                        <a routerLink="/login&register" class="loginA">
+                            <i class="fa fa-sign-in p-0"></i>
+                            Login
+                        </a> |
+                        <a routerLink="/login&register" class="RegisterA">
+                            <i class="fa fa-user-plus p-0"></i>
+                            Register
+                        </a>
+                    </ng-template>
+                    <!-- <a [routerLink]="['/user-dashboard', {outlets: {userprofile: ['user-profile'], editprofile: ['edit-profile']}}]">Account</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="logocontent">
+        <div class="container pos-rel">
+            <div class="row m-0">
+                <div class="col-md-5 col-sm-6 col-xs-12 logoPart">
+                    <div class="logo" *ngIf="appData">
+                        <img src="{{appData.logo_url}}{{appData.logo}}" alt="" [routerLink]="['/home']">
+                    </div>
+
+                </div>
+                <div class="col-md-7 col-sm-6 col-xs-12 ad_ph_Part m-auto">
+                    <div class="row">
+                        <div class="col">
+                            <div class="add">
+                                <span class="headericon"> <i class="fa fa-globe  fa-3x glb"
+                                        aria-hidden="true"></i></span>
+                                <p class="logoT1">Location</p>
+                                <p class="addP1 mb-0" *ngIf="appData">{{appData.address_line_1}}</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="phone">
+                                <span class="headericon"> <i class="fa fa-address-book-o fa-3x glb"
+                                        aria-hidden="true"></i></span>
+                                <p class="logoT1">Connect</p>
+                                <div class="row social_share" *ngIf="appData">
+                                    <div class="sc" (click)="openlink(appData.fb_link)">
+                                        <i class="fa fa-facebook fab_sc pl-0" aria-hidden="true"
+                                            style="color:#f39968"></i>
+                                    </div>
+                                    <div class="sc_wrapper" (click)="openlink(appData.twitter_link)">
+                                        <i class="fa fa-twitter fab_sc" aria-hidden="true" style="color:#f39968"></i>
+                                    </div>
+                                    <div class="sc_wrapper" (click)="openlink(appData.linked_link)">
+                                        <i class="fa fa-linkedin fab_sc" aria-hidden="true" style="color:#f39968"></i>
+                                    </div>
+                                </div>
+                                <!-- <p class="addP1 mb-0">{{appData.phone}}</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-nav></app-nav>
+        </div>
+    </div>
+</div>
+<!-- header ends' -->
+
+<!-- [routerLink]="['/chat']" -->
+<!-- notification status
+1.book space
+2.approve the booking
+3.reject the booking
+9.give space review -->

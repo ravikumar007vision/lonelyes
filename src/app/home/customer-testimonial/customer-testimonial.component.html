@@ -1,0 +1,39 @@
+<div class="cust_testimonial">
+  <div class="container text-center">
+    <h2 class="ctT1">The Tribe has Spoken!</h2>
+    <div class="d">
+      <div class="">
+        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+          <div class="carousel-inner" >
+            <ng-container  *ngFor="let ct of TestimonialData; index as i ; first as isFirst " >
+            <div class="carousel-item" [className]="isFirst ? 'carousel-item active' : 'carousel-item'">
+              <blockquote>
+                <div class="row testimonial_box">
+                  <div class="col-md-2 imgSec col-xs-12">
+                    <img src="{{ct.image}}" alt="">
+                  </div>
+                  <div class="col-md-10 comSec text-justify col-xs-12">
+                    <div class="comments">
+                     <p>{{ ct.details.description }}</p> 
+                    </div>
+                  </div>
+
+                </div>
+                <div class="author">
+                  <h2 class="ctT2">{{ ct.details.name }}</h2>
+                  <h2 class="ctT3">{{ getTitle(ct.details.position) }}</h2>
+                </div>
+              </blockquote>
+            </div>
+          </ng-container>
+          </div>
+          <ol class="carousel-indicators">
+            <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#quote-carousel" data-slide-to="1"></li>
+            <li data-target="#quote-carousel" data-slide-to="2"></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

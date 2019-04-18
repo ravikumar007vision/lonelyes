@@ -1,0 +1,28 @@
+<div class="search_by_category">
+  <div class="container text-center">
+    <h5 class="category_header">Search By Categories</h5>
+    <div class="row sapceTypeBox" *ngIf="AllCatData">
+      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let space of AllCatData">
+        <div class="box21" [ngStyle]="myStyle(space.img)">
+          <div class="whiteBC">
+            <div class="wt_content" (click)="gotoCat(space.id)">
+              <img src="{{ icon_img_URL }}{{space.icon}}" alt="" height="30" width="30" ngbTooltip="{{ space.tooltip }}"
+                placement="bottom" tooltipClass="tooltip-custom-class">
+              <h5 class="space_name">{{space.name}}</h5>
+            </div>
+          </div>
+
+          <div class="box-content">
+            <h6 class="title">{{ space.name }}</h6>
+            <p class="description">{{space.tooltip}}</p>
+            <a type="button" class="btn btn-green" (click) = "gotoCat(space.id)">View All</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+		
+
+			
+		

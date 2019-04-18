@@ -1,0 +1,198 @@
+<div class="booking_space_section">
+  <div class="page_header">
+    <div class="container">
+      <h4>“Loving the planet, one lonely space at a time”</h4>
+    </div>
+  </div>
+
+
+  <div class="container mt-4">
+    <div class="space_details">
+      <h2>{{spaceDetails.title}}</h2>
+      <p class="loc"><i class="fa fa-map-marker"></i>
+        <span *ngIf="spaceDetails.city">{{spaceDetails.city}},</span>
+        <span *ngIf="!spaceDetails.city">{{spaceDetails.state}},</span>
+        <span> {{spaceDetails.state}} </span>
+        <span>{{spaceDetails.postcode}}</span>
+      </p>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4 outline">
+        <div class="price_star_box text-center">
+          <p class="mb-0 f14"><span class="pTag price"> $ {{spaceDetails.pricerate}} </span> <span class="pTag"> per
+              {{spaceDetails.pricehr}}</span></p>
+          <div class="starbox starRating">
+
+            <ng-template #x let-fill="fill">
+              <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+              </span>
+            </ng-template>
+            <ngb-rating [rate]="ReviewData?.review[0]?.average | number" [starTemplate]="x" max="5" [readonly]="true">
+            </ngb-rating>
+            <span *ngIf="ReviewData?.review[0]?.total_review"><b>
+                {{ ReviewData.review[0]?.total_review | number }}</b></span>
+            <span *ngIf="!ReviewData?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+          </div>
+        </div>
+
+        <div class="bookingForm_wrapper mt-2">
+          <div class="booking_DateForm">
+            <form [formGroup]="datePickerForm" (ngSubmit)="goodtogo($event)">
+              <div class="days_booking">
+                <div class="form-inline my-4">
+                  <div class="input-group-prepend">
+                    <label><b>Select dates to book :</b></label>
+                  </div>
+                  <div class="input-group">
+                    <div class="from_date">
+                      <input class="form-control" placeholder="Start Date" ngbDatepicker #fd="ngbDatepicker" readonly
+                        [minDate]="fmindate" (dateSelect)="onfDateSelect($event)" [maxDate]="fmaxdate"
+                        formControlName="from_date" [disabled]="fdisabled" [markDisabled]="isDisabled"
+                        (click)="fd.toggle()">
+                      <!-- <input type="hidden" formControlName="from_date" />    -->
+                    </div>
+                    <div class="to_date">
+                      <input class="form-control" placeholder="End Date" ngbDatepicker #td="ngbDatepicker" readonly
+                        [disabled]="disabled" [minDate]="tmindate" [maxDate]="tmaxdate" formControlName="to_date"
+                        [markDisabled]="isDisabledt" (click)="td.toggle()">
+                      <!-- <input type="hidden" formControlName="to_date" />    -->
+                    </div>
+
+                    <div
+                      *ngIf="datePickerForm.controls['from_date'].invalid && (datePickerForm.controls['from_date'].dirty || datePickerForm.controls['from_date'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="datePickerForm.controls['from_date'].errors.required">
+                        <i class="fa fa-exclamation-triangle"></i> from date is required *
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="datePickerForm.controls['to_date'].invalid && (datePickerForm.controls['to_date'].dirty || datePickerForm.controls['to_date'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="datePickerForm.controls['to_date'].errors.required">
+                        <i class="fa fa-exclamation-triangle"></i> to_date is required *
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="form-inline my-4">
+                  <div class="input-group-prepend">
+                    <label><b>Time</b></label>
+                  </div>
+                  <div class="input-group">
+                    <div class="from_time">
+                      <select class="form-control" formControlName="from_time" placeholder="Start Time" #fhrs>
+                        <option [value]="" hidden [selected]="true">Start Time </option>
+                        <option *ngFor="let hour of fhours" [disabled]="hour.disabled" value="{{hour.id}}">
+                          {{hour.value}}</option>
+                      </select>
+
+                      <!-- <button type="button" class="form-control" #ftimen value="{{ftimeformt.id}}" (click)="ftimenow(ftimen,fhrs)">{{ftimeformt.value}}</button> -->
+
+                    </div>
+                    <div class="to_time">
+                      <select class="form-control" formControlName="to_time" #thrs placeholder="End Time">
+                        <option [value]="" hidden [selected]="true">End Time </option>
+                        <option *ngFor="let hour of thours" [disabled]="hour.disabled" value="{{hour.id}}">
+                          {{hour.value}}</option>
+                      </select>
+
+                      <!-- <button type="button" class="form-control" #ttimen value="{{ttimeformt.id}}" (click)="ttimenow(ttimen,thrs)">{{ttimeformt.value}}</button> -->
+                    </div>
+                    <div
+                      *ngIf="datePickerForm.controls['from_time'].invalid && (datePickerForm.controls['from_time'].dirty || datePickerForm.controls['from_time'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="datePickerForm.controls['from_time'].errors.required">
+                        <i class="fa fa-exclamation-triangle"></i> from_time is required *
+                      </div>
+                    </div>
+
+                    <div
+                      *ngIf="datePickerForm.controls['to_time'].invalid && (datePickerForm.controls['to_time'].dirty || datePickerForm.controls['to_time'].touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="datePickerForm.controls['to_time'].errors.required">
+                        <i class="fa fa-exclamation-triangle"></i> to_time is required *
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <p>* Minimum {{spaceDetails.pricehr}}s to Book :
+                <b>{{ spaceDetails.min_hrs ==0 ? spaceDetails.min_no_of_days:spaceDetails.min_hrs}}</b>
+                {{spaceDetails.pricehr}} </p>
+              <h6 class="text-center color-orange f600 f14">{{err}}</h6>
+              <h6 class="text-center color-green f600 f14">{{succes}}</h6>
+              <button type="submit" [disabled]='!datePickerForm.valid' class="btn btn-blue btn-block">Book</button>
+
+              <p class="nochargeTag text-center">you won't be charged yet.</p>
+
+            </form>
+          </div>
+
+          <div class="row bulbSec">
+            <div class="col-9">
+              <p class="viewTag">This space is on people minds. It's been viewed 500+ times in the past week.</p>
+            </div>
+            <div class="col-3 col_3_bulb">
+              <img src="assets/img/bulb_logo.png" alt="" width="50" class="rounded-circle">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 revSec">
+        <div class="reviews">
+          <h6 class="f600 text-center"><u>Latest Review</u></h6>
+          <ng-container *ngIf="ReviewData?.review != ''">
+            <ng-container *ngFor="let rv of ReviewData?.review">
+              <p class="f13">{{ rv?.review }} </p>
+            </ng-container>
+            <a type="button" class="btn btn-blue goto_review" (click)="viewReviews()">See All Reviews</a>
+          </ng-container>
+
+          <ng-container *ngIf="ReviewData?.review ==''">
+            <h6 class="text-center" style="margin-top: 150px;">There are no reviews yet.</h6>
+            <h6 class="text-center">Be the first to review this space</h6>
+          </ng-container>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+
+      <div class="col-md-4">
+        <div class="similar_spaces">
+          <h6 class="f600 similar_space_header">SIMILAR SPACES</h6>
+          <div *ngFor="let space of SimilarSpaces">
+            <div class="spacebox">
+              <img src="{{picURL}}/{{space?.data?.owner_id}}/{{space?.pic}}">
+              <h5 class="my-2 f15 f600">{{ space?.data?.title }}</h5>
+              <h6 class="my-1 f13"><i
+                  class="fa fa-map-marker"></i>{{space?.data?.cityname}}, {{space?.data?.statename}} {{space?.data?.postcode}}
+              </h6>
+              <div class="starbox starRating">
+                <ng-template #x let-fill="fill">
+                  <span class="star" [class.full]="fill === 100">
+                    <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                  </span>
+                </ng-template>
+                <ngb-rating [rate]="space?.data?.review[0]?.average | number" [starTemplate]="x" max="5"
+                  [readonly]="true">
+                </ngb-rating>
+                <span *ngIf="space?.data?.review[0]?.total_review"><b>
+                    {{ space?.data?.review[0]?.total_review | number }}</b></span>
+                <span *ngIf="!space?.data?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+              </div>
+              <button type="button" class="btn btn-block btn-green btn_view" (click)="viewSpace(space?.data?.id)">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

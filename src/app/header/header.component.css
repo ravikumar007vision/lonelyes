@@ -1,0 +1,260 @@
+/*------------------------ header -----------------------------*/
+.userlogin .msg {
+  position: relative;
+}
+
+.userlogin .msg:hover {
+  cursor: pointer;
+}
+
+.userlogin .msg .badge {
+  position: absolute;
+  top: -6px;
+  left: 17px;
+  background-color: #f39768;
+  border-radius: 2px;
+  color: #fff;
+  padding: 1px 3px;
+}
+
+.userlogin .profile_pic {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 5px 0 5px;
+}
+
+.dropdownProfile {
+  width: 198px;
+  top: 5px !important;
+  left: -50px !important;
+  padding: 0 !important;
+}
+
+.dropdownProfile hr {
+  margin: 0;
+}
+
+.dropdownProfile a,
+.dropdownProfile a:visited {
+  color: rgba(9, 28, 54, 0.906);
+  background-color: rgba(74, 191, 179, 0.21);
+  padding: 7px 0 !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dropdownProfile a:hover {
+  background-color: #4abfb3;
+  color: white;
+}
+
+.dropdownProfile hr {
+  background-color: rgba(74, 191, 179, 0.369);
+}
+
+.fa {
+  padding-right: 4px;
+  padding-left: 6px;
+}
+
+.loginA,
+.RegisterA {
+  margin: 0 10px;
+  color: white;
+}
+
+#welcome {
+  color: #091d36;
+  vertical-align: middle;
+}
+
+.userlogin .fa-user-circle-o:hover,
+.userlogin img:hover {
+  cursor: pointer;
+}
+
+.social_share .fab_sc {
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.social_share .fab_sc:hover {
+  font-size: 21px;
+  color: #091d36 !important;
+}
+
+/*----------------- logosection----------------------------------- */
+
+.logo img {
+  height: 100px;
+  width: 125px;
+  padding: 10px;
+}
+
+.logo img:hover {
+  cursor: pointer;
+}
+
+.glb {
+  float: left;
+  padding-right: 10px;
+  color: #f39968;
+  /* font-size: 49px; */
+}
+
+.logoT1 {
+  color: #4abfb3;
+  font-size: 18px;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.ad_ph_Part .row {
+  margin: 0 0 19px 0;
+}
+
+.addP1 {
+  font-size: 14px;
+}
+
+.logoPart {
+  margin: 0 0 25px 0;
+}
+
+.container {
+  width: 100%;
+  padding: 0;
+}
+
+@media only screen and (max-width: 620px) {
+
+  /* For mobile phones: */
+  .topbar {
+    margin: 0;
+  }
+
+  .social_share {
+    display: none;
+  }
+
+  /* .dropdownProfile {
+    left: -21px !important;
+  } */
+  .ad_ph_Part {
+    display: none;
+  }
+
+  .logo {
+    text-align: center;
+  }
+
+  .logo img {
+    height: 170px;
+    width: 210px;
+  }
+
+  .pos-rel {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 767px) {
+  .logoT1 {
+    font-size: 13px;
+  }
+
+  .addP1 {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 590px;
+    padding: 0;
+  }
+
+  .social_share .fab_sc {
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .glb {
+    float: left;
+    padding-right: 10px;
+    color: #f39968;
+    font-size: 34px;
+  }
+
+  .col {
+    padding: 0px;
+  }
+
+  .addP1 {
+    font-size: 10px;
+  }
+
+  .addP1 {
+    font-size: 9px;
+  }
+
+  .headericon {
+    height: 50px;
+    display: inline-block;
+    float: left;
+  }
+
+  .search_submit {
+    display: contents;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 812px) and (orientation: landscape) {
+  .social_share .fab_sc {
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .glb {
+    float: left;
+    padding-right: 10px;
+    color: #f39968;
+    font-size: 45px;
+  }
+
+  .addP1 {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) and (orientation: portrait) {
+  .ad_ph_Part .row {
+    margin: 0;
+  }
+
+  .container {
+    max-width: 720px;
+  }
+
+  .addP1 {
+    font-size: 12px;
+  }
+
+  .ad_ph_Part .row {
+    margin: 0 0 17px 0;
+  }
+}
+
+.green {
+  color: #4abfb3;
+}
+
+.blue {
+  color: #091d36;
+}
+
+.red {
+  color: red;
+}

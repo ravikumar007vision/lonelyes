@@ -1,0 +1,328 @@
+<div class="reservations_sec">
+  <div class="container reservation_cont">
+    <div class="row reservation_header">
+      <div class="col-md-6 col-sm-6 w50">
+        <h3 class="mrT1">My Space Booking</h3>
+      </div>
+      <div class="col-md-6 col-sm-6 col_6 w50">
+        <!-- <div class="dropdown sorting_type">
+          <button class="btn dropdown-toggle btn_sort" type="button" data-toggle="dropdown">Status
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li class="sort_droptype"><a href="#">Ongoing</a></li>
+            <li class="sort_droptype"><a href="#">Upcoming</a></li>
+            <li class="sort_droptype"><a href="#">Completed</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- table starts -->
+    <div class="reservation_listing">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-blue text-center">
+          <thead class="tbl_header f13">
+            <th>SN</th>
+            <th class="text-left">Space Name</th>
+            <th class="text-left">Renter</th>
+            <th class="text-left">Address</th>
+            <th class="text-left">Time Duration</th>
+            <th>Status</th>
+            <th>Action</th>
+          </thead>
+
+          <tbody *ngIf="!noSpaceBooked">
+            <tr *ngFor="let elist of bookingList | slice:slicei:slicea; let i= index;" class="f13 text-center">
+              <td class="align-middle">{{ slicei+i+1 }}</td>
+              <td class="align-middle text-left">{{ doTrim(elist.title,45)}}</td>
+              <td class="align-middle text-left renter_name"
+                (click)="openmodal(customerReviewBox,elist);getRenterRatings()">
+                <a>{{ elist?.buyername}}</a></td>
+              <td class="align-middle text-left">
+                <span *ngIf="elist.city">{{elist.city}},</span>
+                <span *ngIf="!elist.city">{{elist.state}},</span>
+                <span> {{elist.state}} </span>
+                <span>{{elist.postcode}}</span>
+              </td>
+              <td class="align-middle text-left">{{ elist.from_date | date:'mediumDate'}} <b>-</b>
+                {{ elist.to_date | date:'mediumDate'}} </td>
+              <td class="align-middle"
+                [ngClass]="{green: getStatus(elist.from_date,elist.to_date) ==='ongoing', blue: getStatus(elist.from_date,elist.to_date) ==='upcoming', red: getStatus(elist.from_date,elist.to_date) ==='past'}">
+                <span *ngIf="getStatus(elist.from_date,elist.to_date) == 'ongoing'">Current</span>
+                <span *ngIf="getStatus(elist.from_date,elist.to_date) == 'past'">Past</span>
+                <span *ngIf="getStatus(elist.from_date,elist.to_date) == 'upcoming'">Upcoming</span>
+              </td>
+
+              <td class="align-middle actionICON text-center">
+
+
+                <!--waitng Seller Approval -->
+                <i class="fa fa-clock-o fa-spin color-blue" ngbTooltip="Booking Confirmation required!"
+                  (click)="openmodal(confirmationBox,elist)"
+                  *ngIf="elist?.status == 0 && getStatus(elist.from_date,elist.to_date) ==='upcoming' "></i>
+
+                <!-- rejected by seller -->
+                <i class="fa fa-ban red" *ngIf="elist?.status == 1" ngbTooltip="You rejected the booking!"></i>
+
+                <!--Seller Accepted the booking -->
+                <i class="fa fa-clock-o fa-spin green" ngbTooltip="Waiting for customer to pay!"
+            
+                  *ngIf="elist?.status == 2 && elist?.payment_status == 0 &&  getStatus(elist.from_date,elist.to_date) ==='upcoming' "></i>
+
+                <!-- seller approval pending and time lapsed -->
+                <i class="fa fa-clock-o  color-red" ngbTooltip="Booking failed! You didn't respond on time"
+                  *ngIf="elist?.status == 0 && (getStatus(elist.from_date,elist.to_date) ==='past' || getStatus(elist.from_date,elist.to_date) ==='ongoing')"></i>
+
+                <!-- seller approved but customer payment time lapsed -->
+                <i class="fa fa-clock-o color-red" ngbTooltip="Booking failed. Customer didn't pay."
+                  *ngIf="(elist?.status == 2) && (elist?.payment_status == 0) && 
+                 (getStatus(elist.from_date,elist.to_date) ==='past' || getStatus(elist.from_date,elist.to_date) ==='ongoing')"></i>
+
+                <!-- customer paid and booking is ongoing-->
+                <i class="fa fa-check-circle-o green" aria-hidden="true" ngbTooltip="Ongoing"
+                  *ngIf="(elist?.status == 2) &&(elist?.payment_status == 1) && (getStatus(elist.from_date,elist.to_date) ==='ongoing')"></i>
+
+
+                <!-- customer paid and time is compelted-->
+                <i class="fa fa-check-circle-o green" aria-hidden="true" ngbTooltip="Completed"
+                  *ngIf="(elist?.status == 2) && (elist?.payment_status == 1) && (getStatus(elist.from_date,elist.to_date) ==='past')"></i>
+
+                <!-- customer paid and time is compelted so give rating to customer-->
+                <i class="fa fa-star-o blue" aria-hidden="true" ngbTooltip="Give rating to the renter"
+                  *ngIf="(elist?.status == 2) && (elist?.payment_status == 1) && (getStatus(elist.from_date,elist.to_date) ==='past')"
+                  (click)="openmodal(reviewTheCustomerBox,elist);getSubmittedRenterRating()"></i>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="noBookings text-center" *ngIf="noSpaceBooked">
+          <img src="assets/icon/logo_image_grey.png" alt="">
+          <h5> <b>No Space Bookings yet</b></h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- lower section -->
+    <div class="spaceList_footer text-center" *ngIf="lastpage > 1">
+      <div class="btn-group pageToggle">
+        <button type="button" class="btnCLK" (click)="mLeft()"><i class="fa fa-fast-backward"
+            aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK" (click)="fLeft()" [disabled]="slicei === 0"><i class="fa fa-step-backward"
+            aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK">Page : {{page}} of {{ lastpage }}</button>
+        <button type="button" class="btnCLK" (click)="fRight()" [disabled]="slicea > bookingList.length"><i
+            class="fa fa-step-forward" aria-hidden="true"></i></button>
+        <button type="button" class="btnCLK" (click)="mRight()"><i class="fa fa-fast-forward"
+            aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Confirmation template -->
+<ng-template #confirmationBox let-c="close" let-d="dismiss">
+  <div class="modal-header bg-green">
+    <h5 class="modal-title color-white" id="modal-basic-title"> <i class="fa fa-exclamation-triangle color-white"></i>
+      Booking Confirmation required!</h5>
+    <button type="button" class="close red" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="confirmatin_box" *ngIf="!readyToSendMsg">
+      <h6 class="f13 f600"> Booking Details :</h6>
+      <table class="table table-striped table-hover table-blue text-center">
+        <tbody>
+          <tr class="f13 ">
+            <td class="text-left f600">{{ 'Renter Name:' }}</td>
+            <td class="text-left">{{  currentBookingData?.buyername}}</td>
+          </tr>
+          <tr class="f13">
+            <td class="text-left f600">{{ 'Duration:' }}</td>
+            <td class="text-left">{{ currentBookingData?.from_date | date }} {{currentBookingData?.from_time}} -
+              {{ currentBookingData.to_date | date}} {{currentBookingData.to_time}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="btnGroup text-center">
+        <button class="btn btn-primary f500" (click)="sendMSGToggle()">Send Message</button>
+        <button class="btn btn-danger" (click)="confirmBooking(1)">Reject</button>
+        <button class="btn btn-success" (click)="confirmBooking(2)">Accept</button>
+      </div>
+    </div>
+    <div class="send_msg" *ngIf="readyToSendMsg">
+      <h6 class="f13 f600"> Your message :</h6>
+      <ng-container>
+        <form [formGroup]="messageForm" (ngSubmit)="sendMsg()">
+          <div class="form-group f13 mb-0">
+            <textarea class="form-control" rows="5" formControlName="message"
+              placeholder="Your message... (Max 500 characters)"></textarea>
+            <div class="form-group  mt-2">
+              <button type="button" class="btn btn-danger w-25 float-left" (click)="sendMSGToggle()"><i
+                  class="fa fa-arrow-left"></i> Back </button>
+              <button type="submit" class="btn btn-success w-50 float-right" [disabled]="!messageForm.valid">
+                Send
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<!-- give customer review -->
+<ng-template #reviewTheCustomerBox let-c="close" let-d="dismiss">
+  <div class="modal-header bg-green">
+    <h5 class="modal-title color-white" id="modal-basic-title"> <i class="fa fa-exclamation-triangle color-white"></i>
+      Rate your space renter !</h5>
+    <button type="button" class="close red" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="color-orange f600 text-center">{{currentBookingData?.buyername}}</p>
+    <p class="mb-2 f12"> <b>Note: </b> Your review will be posted publicly.</p>
+    <ng-container *ngIf="!reviewSubmitted;else afterReviewSubmitted">
+      <form [formGroup]="feedbackForm" (ngSubmit)="rateTheRenter()">
+        <div class="form-group f13 mb-0">
+          <textarea class="form-control" rows="5"
+            placeholder="Let space users know your experince with the renter... (Max 500 characters)"
+            formControlName="feedback"></textarea>
+        </div>
+
+        <div
+          *ngIf="feedbackForm.controls['feedback'].invalid && (feedbackForm.controls['feedback'].dirty || feedbackForm.controls['feedback'].touched)"
+          class="alert alert-danger">
+          <div *ngIf="feedbackForm.controls['feedback'].errors.minlength">
+            <i class="fa fa-exclamation-triangle"></i> Minimum 50 characters required!
+          </div>
+          <div *ngIf="feedbackForm.controls['feedback'].errors.maxlength">
+            <i class="fa fa-exclamation-triangle"></i> Maximum 500 characters allowed!
+          </div>
+        </div>
+
+        <div class="form-group  mt-2">
+          <p class="mb-0 f600 color-green">Give stars rating according to your experience.</p>
+
+          <div class="Rating starRating">
+            <ng-template #x let-fill="fill">
+              <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+              </span>
+            </ng-template>
+            <div class="row">
+              <div col-4 class="m-auto f14">Rating :</div>
+              <div class="col-5">
+                <ngb-rating [(rate)]="rating_stars" [starTemplate]="x" max="5" formControlName="rating_stars">
+                </ngb-rating>
+              </div>
+              <div col-2 class="m-auto"><i class="text-center"> Rate:
+                  <b *ngIf="rating_stars;else zero">{{rating_stars}}</b></i></div>
+            </div>
+          </div>
+          <hr class="m-0">
+
+
+
+          <ng-template #zero>0</ng-template>
+          <hr class="mt-0">
+        </div>
+        <button type="submit" class="btn btn-danger btn-block" [disabled]='!feedbackForm.valid || rating_stars == 0'>
+          Submit
+        </button>
+      </form>
+    </ng-container>
+  </div>
+</ng-template>
+
+
+<ng-template #afterReviewSubmitted>
+  <div class="text-center color-green">
+    <h5>Your Review submitted successfully.</h5>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+<!--All Ratings and reviews of a renter -->
+<ng-template #customerReviewBox let-c="close" let-d="dismiss">
+  <div class="modal-header bg-green renterReviewHeader">
+    <img src="{{profile_picURL}}/{{buyerData?.id}}/{{buyerData?.profile_image}}"
+      *ngIf="buyerData?.profile_image != null">
+    <img src="assets/icon/user.png" alt="dp" *ngIf="buyerData?.profile_image == null">
+    <h5 class="modal-title color-white pl-2" id="modal-basic-title">
+      {{currentBookingData?.buyername}}
+      <div class="starbox starRating d-inline-block">
+        <span class="starPoints"><b>{{ renterAverageRate }}</b></span>
+        <ng-template #x let-fill="fill">
+          <span class="star" [class.full]="fill === 100">
+            <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+          </span>
+        </ng-template>
+        <ngb-rating [rate]="renterAverageRate" [starTemplate]="x" max="5" [readonly]="true">
+        </ngb-rating>
+        <span *ngIf="totalRenterReviews > 0"><b>{{ totalRenterReviews }} Reviews</b></span>
+        <span *ngIf="totalRenterReviews == 0"><b>0 Review </b></span>
+      </div>
+    </h5>
+    <button type="button" class="close red" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body renterReviewBody">
+    <div class="renterReviewListBox">
+      <ng-container *ngIf="renterRatingList.length > 0">
+        <ng-container *ngFor="let review of renterRatingList">
+          <div class="single_review">
+            <div class="single_review_header">
+              <div class="reviewer_img">
+                <img src="{{profile_picURL}}/{{review?.sellerdata?.id}}/{{review?.sellerdata?.profile_image}}"
+                  *ngIf="review?.sellerdata?.profile_image != null">
+                <img src="assets/icon/user.png" alt="dp" *ngIf="review?.sellerdata?.profile_image == null">
+              </div>
+              <div class="reviewer_info">
+                <h6 class="color-blue mb-0 f13 f600">{{review?.sellerdata?.name}} </h6>
+                <div class="starbox starRating ml-0">
+                  <!-- <span class="starPoints"><b>{{ '' }}</b></span> -->
+                  <ng-template #x let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                  </ng-template>
+                  <ngb-rating [rate]="review?.rate" [starTemplate]="x" max="5" [readonly]="true">
+                  </ngb-rating> <span class="f12 f600"><i>{{review?.updated_at | date:"longDate" }}</i></span>
+                </div>
+              </div>
+            </div>
+            <hr class="my-0">
+            <div class="single_review_text">
+              <p class="mb-0"> {{review?.review}}</p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="renterRatingList.length == 0">
+        <div class="noRenterReview text-center">
+          <img src="assets/icon/logo_image_grey.png" width="150" height="150">
+          <h6 class="mt-3 color-orange"><b>No Any Reviews of this Renter</b></h6>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="modal-footer renterReviewFooter">
+    <button type="button" class="btn btn-blue" (click)="d('Cross click')">Close</button>
+  </div>
+</ng-template>

@@ -1,0 +1,75 @@
+/*  profile picture */
+.profile_pic_upload_sec img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.user_Header h3 {
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 0;
+}
+
+.edit_profile_link {
+  color: white;
+  padding-right: 5px;
+  font-size: 13px;
+  float: right;
+  position: absolute;
+}
+
+.profileTable {
+  width: 80%;
+  margin-left: 10%;
+}
+.edit_btn_Div .btn {
+  padding: 7px 0;
+  width: 170px;
+  font-size: 13px;
+}
+.btn:hover {
+  background-color: #f39668 !important;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .headT {
+    font-size: 14px;
+    width: 48%;
+  }
+  .headB {
+    word-break: break-word;
+  }
+  .user_Header h3 {
+    padding: 10px 0;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .user_table{
+    padding: 10px;
+  }
+  .profileTable {
+    width: 100%;
+    margin: 0px;
+  }
+  .table td {
+    padding: 5px 25px;
+    font-size: 13px;
+  }
+}
+@media only screen and (min-device-width: 621px) and (max-device-width: 768px) {
+  /* For ipad: */
+  .user_Header h3 {
+    padding: 13px 0;
+    font-size: 21px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .user_Header h3 {
+    margin-top: 30px;
+    background-color: #f39968;
+  }
+}

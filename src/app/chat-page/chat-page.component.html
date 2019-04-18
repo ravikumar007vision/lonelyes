@@ -1,0 +1,232 @@
+<div class="chat_section">
+  <div class="container">
+    <div class="chatterbox_head text-center bg-orange">
+      <h4 class="py-3 color-white">Messages </h4>
+      <div class="wrapper">
+
+        <div class="toggle_radio">
+          <input type="radio" [checked]="isSellerChecked" class="toggle_option" id="first_toggle" name="toggle_option"
+            (change)="change_chat_role(1)">
+          <input type="radio" [checked]="!isSellerChecked" class="toggle_option" id="second_toggle" name="toggle_option"
+            (change)="change_chat_role(0)">
+          <label for="first_toggle">
+            <p class="mb-0">Seller</p>
+          </label>
+          <label for="second_toggle">
+            <p class="mb-0">Renter</p>
+          </label>
+          <div class="toggle_option_slider">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="messaging_box">
+      <div class="row">
+        <!-- left part -->
+        <div class="col-md-4 person_listbox">
+          <div class="search_filter_Box">
+            <form id="search" [formGroup]="filterForm">
+              <ng-container *ngIf="!isSellerChecked">
+                <div class="blank" *ngIf="!hidedrop && !filled">
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="isSellerChecked">
+                <ng-container *ngIf="!hidedrop && !filled">
+                  <div class="space_list_drop ">
+                    <select class="spaceName" class="form-control" (change)="getChatsBySpaceID($event.target.value)"
+                      formControlName="space_id">
+                      <option selected value="0">Choose your space...</option>
+                      <option [value]="space?.id" *ngFor="let space of sellerSpaceListing">{{ doTrim(space?.title,20) }}
+                      </option>
+                    </select>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+
+              <div class="searchbar">
+                <button class="close" *ngIf="filled"
+                  (click)="search.value=''; filled=false; onSearchChange('')">x</button>
+                <input #search type="search" [placeholder]="filled?'Search':''" [ngClass]="{'filled':filled}"
+                  (click)="filled=!filled;" (blur)="filled=search.value?true:false ; hidedrop = false"
+                  (input)="onSearchChange($event.target.value)" (focus)="hidedrop = true" formControlName="searchText">
+              </div>
+            </form>
+          </div>
+
+          <div class="chat_listbox">
+            <ng-container *ngIf="AllChatListing">
+              <div class="chat_list" *ngFor="let cList of AllChatListing">
+                <div class="row m-0" (click)="openChat(cList)">
+                  <div class="col-2">
+                    <img src="{{picURL}}/{{cList?.uid}}/{{cList?.profile_image}}?" *ngIf="cList?.profile_image != null">
+                    <img src="assets/icon/user.png" alt="dp" *ngIf="cList?.profile_image == null">
+                  </div>
+                  <div class="col-9">
+                    <p class="receiver_name mb-0">{{cList?.name}}</p>
+                    <p class="space_name mb-0">{{ cList?.space?.title }}</p>
+                    <p class="last_msg mb-0">{{cList?.message}}<span
+                        class="last_msg_date">{{cList?.date_time*1000 | date:'medium' }}</span></p>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="noSearchFound">
+              <h5 class="text-center color-red mt-4">No Search Found</h5>
+            </ng-container>
+            <ng-container *ngIf="noChatList">
+              <h5 class="text-center color-red mt-4">No Previous Chat</h5>
+            </ng-container>
+
+          </div>
+        </div>
+        <!-- middle part -->
+        <div class="col-md-8 middleSec">
+          <div class="middlepart" *ngIf="!noChatList">
+            <div class="row client_header">
+              <div class="col-2">
+                <img [src]="receiver_pic" class="chatbox_IMG" alt="dp" *ngIf="isProfile_pic">
+                <img src='assets/icon/user.png' alt="dp" class="chatbox_IMG" *ngIf="!isProfile_pic">
+              </div>
+              <div class="col-9 clearfix">
+                <h5 class="client_name">{{ receiver_name }} </h5>
+                <p class="client_loc f12">{{'Australia'}}</p>
+              </div>
+              <div class="col-1 m-auto">
+                <i class="fa fa-refresh" [ngClass]="{'fa-spin': isRefreshing}" (click)="refresh()"></i>
+              </div>
+            </div>
+            <div class="chatbox">
+              <div class="conversationBox">
+                <div class="m" *ngFor="let chat of chatHistory">
+                  <div class="clientMSGS" *ngIf="chat.sender_id != user.id">
+                    <div class="row">
+                      <div class="col-md-9 clientpart">
+                        <div class="msgpart msgpart_CLI">
+                          {{ chat.message }}
+                        </div>
+                        <div class="timingpart">
+                          {{ chat.date_time*1000 | date:'medium' }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="hostMSGS" *ngIf="chat.sender_id == user.id ">
+                    <div class="row">
+                      <div class="col-3"></div>
+                      <div class="col-md-8 hostpart">
+                        <div class="hostpart">
+                          <div class="msgpart msgpart_HOST">
+                            {{ chat.message }}
+                          </div>
+                          <div class="timingpart">
+                            {{ chat.date_time*1000 | date:'medium' }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- msg reply box -->
+              </div>
+            </div>
+            <div class="commentBox">
+              <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+                <div class="row cb_row">
+                  <!-- <div class="col-1 col_ATC">
+                    <div class="send_Attachment">
+                      <input type="file" id="File01">
+                    </div>
+                  </div> -->
+
+                  <div class="col-10 col_MSG">
+                    <div class="input_msg_write">
+                      <div class="form-group fg_message">
+                        <textarea class="form-control" rows="3" id="message" placeholder="Enter your message . . ."
+                          formControlName="message"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 col_SND">
+                    <div class="send_DIV">
+                      <button type="submit" class="btn btn_send" [disabled] = "!messageForm.valid"><img src="assets/logo/send.png" class="send_logo"
+                          alt=""></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+        <!--------------- right side / attachment box---------->
+
+        <!-- <div class="col-md-2 attachment">
+          <div class="attachment_header">
+            <h5 class="achT1">Chester Hill Apartment</h5>
+            <h6 class="achT2">Attachments :</h6>
+          </div>
+          <div class="file_scroll">
+            <div class="row attachment_list" *ngFor="let att_File of Attachments">
+              <div class="col-2 imgDIV">
+                <img src="assets/logo/camera.png" class="fileIMG" alt="">
+              </div>
+              <div class="col-10">
+                <div class="upper">
+                  <h6 class="uploadedBY"><strong>By : </strong>{{ att_File.sender }}</h6>
+                  <h6 class="file_name">{{ att_File.file }}</h6>
+                  <h6 class="view_dwnld"><a href="#">Preview | </a><a href="#"> Download</a></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- first msg -->
+<ng-template #firstMessage let-c="close" let-d="dismiss">
+  <div class="modal-header bg-green">
+    <h5 class="modal-title color-white" id="modal-basic-title">Write your first message.</h5>
+    <button type="button" class="close red" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="feedBackBox">
+      <p class="color-orange f600 text-center">{{incoming_space_name}}</p>
+      <!-- <p class="mb-2 f12"> <b>To: </b> {{'Amitabh Bachchan'}}</p> -->
+      <ng-container>
+        <form [formGroup]="messageForm" (ngSubmit)="sendFirstMSg()">
+          <div class="form-group f13 mb-0">
+            <textarea class="form-control" rows="5" formControlName="message"
+              placeholder="Your message... (Max 500 characters)"></textarea>
+            <div class="form-group  mt-2">
+              <p class="mb-0 f600 color-green">First message matters. </p>
+
+              <button type="submit" class="btn btn-danger btn-block">
+                Send
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>

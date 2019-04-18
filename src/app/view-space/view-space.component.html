@@ -1,0 +1,290 @@
+<section class="view_space_details">
+  <div class="small_beauty_house_slider">
+    <div class="container">
+      <h4 class="sbhT1">“Redefining the purpose of space”</h4>
+    </div>
+  </div>
+
+
+  <div class="container place-desc" *ngIf="PrimaryDataLoaded">
+    <div class="row">
+      <div class="col-md-9 col-12">
+        <div class="row smhT2">
+          <div class="col-md-6 col-xs-12 spacetitle">
+            <h2 class="space_name">{{spaceDetails.title}}</h2>
+            <p class="space_loc"><i class="fa fa-map-marker color-green"></i>
+              <span *ngIf="spaceDetails.city">{{spaceDetails.city}},</span>
+              <span *ngIf="!spaceDetails.city">{{spaceDetails.state}},</span>
+              <span> {{spaceDetails.state}} </span>
+              <span>{{spaceDetails.postcode}}</span>
+            </p>
+          </div>
+          <div class="col-md-6 col-xs-12 m-auto text-center">
+            <div class="fl_right">
+              <button type="button" class="btn btn_book" (click)="bookSpace()">Book Me!</button>
+            </div>
+          </div>
+        </div>
+
+        <ngb-carousel *ngIf="inComingPics.length !== 0">
+          <ng-template ngbSlide *ngFor="let pic of inComingPics">
+            <img class="d-block w-100" src="{{picURL}}/{{spaceDetails.owner_id}}/{{ pic }}" alt="Space Picture">
+          </ng-template>
+        </ngb-carousel>
+
+        <div class="space_area_details">
+          <div class="space_detail">
+            <h4 class="smhT3">SPACE DETAILS</h4>
+            <div class="starbox starRating">
+              <span class="starPoints"><b>{{spaceDetails?.review[0]?.average}}</b></span>
+              <ng-template #x let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span>
+              </ng-template>
+              <ngb-rating [rate]="spaceDetails.review[0]?.average | number" [starTemplate]="x" max="5"
+                [readonly]="true">
+              </ngb-rating>
+              <span *ngIf="spaceDetails?.review[0]?.total_review" class="f17 ml-2"><b>
+                  {{ spaceDetails?.review[0]?.total_review | number }} Reviews</b>
+              </span>
+              <span *ngIf="!spaceDetails?.review[0]?.total_review"><b> {{ '0' }} Review</b></span>
+
+              <!-- <span> 105</span> -->
+            </div>
+            <table class="table table-bordered table-hover table-responsive-sm">
+              <tbody>
+                <tr>
+                  <td class="typeBLD">Category</td>
+                  <td>{{ spaceDetails.space_type }}</td>
+                </tr>
+                <!-- <tr>
+                    <td class="typeBLD">Space Use</td>
+                    <td>??????</td>
+                  </tr> -->
+                <tr>
+                  <td class="typeBLD">Space Capacity</td>
+                  <td *ngIf="spaceDetails?.otherspacecapacity == ''">{{spaceDetails.capacity_of_space}} Persons</td>
+                  <td *ngIf="spaceDetails?.otherspacecapacity != ''">{{spaceDetails.otherspacecapacity}} Persons</td>
+                </tr>
+                <tr>
+                  <td class="typeBLD">Facilities & Amenities</td>
+                  <td class="td_wh_space">
+                    <span *ngFor="let am of IncomingAmenityList">
+                      <span *ngIf="am.name !='Other Amenities'">
+                        {{ am.name }},
+                      </span></span>
+                    <span> {{spaceDetails.otheramenities}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="about_space">
+              <h4 class="smhT3">ABOUT THIS SPACE</h4>
+              <p class="f14">{{spaceDetails.overview }}</p>
+
+            </div>
+          </div>
+          <div class="reviews">
+            <h4 class="smhT3 color-blue mb-3">LATEST REVIEW</h4>
+            <ng-container *ngIf="spaceDetails?.latestreview?.review;else noReviews">
+              <div class="reviewer_img">
+                <img
+                  src="{{profile_URL}}/{{spaceDetails?.latestreview?.user_id}}/{{spaceDetails?.latestreview?.profile_image}}"
+                  *ngIf="spaceDetails?.latestreview?.profile_image != null">
+                <img src="assets/icon/user.png" alt="dp" *ngIf="spaceDetails?.latestreview?.profile_image == null">
+              </div>
+              <div class="reviewer_info">
+                <h6 class="mb-0 f600"> {{ spaceDetails?.latestreview?.name }} ,
+                  <span class="f12"> {{spaceDetails?.latestreview?.created_at | date:'longDate' }}</span>
+                </h6>
+
+                <div class="starbox starRating ml-0">
+                  <span class="starPoints"><b>{{spaceDetails?.review[0]?.average}}</b></span>
+                  <ng-template #x let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                  </ng-template>
+                  <ngb-rating [rate]="spaceDetails.review[0]?.average | number" [starTemplate]="x" max="5"
+                    [readonly]="true">
+                  </ngb-rating>
+                </div>
+              </div>
+
+
+              <p class="f14">{{ spaceDetails?.latestreview?.review}}</p>
+              <button type="button" class="btn_see_reviews" (click)="viewReviews()">See all reviews</button>
+            </ng-container>
+
+
+
+
+
+
+            <ng-template #noReviews>
+              <div class="no_reviews">
+                <h6>There are no reviews yet.</h6>
+                <h6>Be the first to review this space</h6>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="location">
+            <h4 class="smhT3">LOCATION</h4>
+            <div class="location_area">
+              <!-- <img src="assets/img/map.png" alt=""> -->
+              <iframe [src]='mapURL' frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-12 col_RT">
+        <div class="pricing">
+          <p class="dollarTag">Price : $ {{spaceDetails.pricerate}} / <span class="f12">{{spaceDetails.pricehr}}</span>
+          </p>
+        </div>
+        <div class="space_info">
+          <div class="availablity">
+            <h5 class="text-center">Availability</h5>
+            <p class="mb-0 text-center" *ngIf="spaceDetails.min_hrs == 0">
+              <span class="f14 f600"> {{spaceDetails.from_date | date:'longDate'}} -</span>
+              <span class="f14 f600"> {{spaceDetails.to_date | date:'longDate'}}</span>
+            </p>
+            <p class="mb-0 text-center" *ngIf="spaceDetails.min_no_of_days == 0">
+              <span class="f14 f600"> {{spaceDetails.from_date | date:'longDate'}} -</span>
+              <span class="f14 f600"> {{spaceDetails.to_date | date:'longDate'}}</span>
+            </p>
+
+          </div>
+          <p class="mb-0 min" *ngIf="spaceDetails.min_hrs == 0"><i class="fa fa-exclamation-circle"></i>
+            <i> min days to book </i>: <b>{{spaceDetails.min_no_of_days}}</b> Days</p>
+          <p class="mb-0 min" *ngIf="spaceDetails.min_no_of_days == 0"><i class="fa fa-exclamation-circle"></i>
+            <i> min hours to book </i>: {{spaceDetails.min_hrs}} Hrs</p>
+
+          <!-- <a class="btn btn-block btn-green color-white mt-0"><i class="fa fa-phone fa-lg"></i> +401-350-58544</a> -->
+          <a class="btn btn-block bg-orange color-white mt-1" *ngIf="!this.inWishlist" (click)="toggleLike()">
+            <i class="fa fa-heart-o fa-lg"></i>Add to Watchlist</a>
+          <a class="btn btn-block bg-orange color-white mt-1" *ngIf="this.inWishlist" (click)="toggleLike()">
+            <i class="fa fa-heart fa-lg color-white"></i>Added in Watchlist</a>
+          <button class="btn btn-block bg-orange color-white mt-1" (click)="initiateChat()"
+            [disabled]="spaceDetails.owner_id == user.id">
+            <i class="fa fa-comments fa-lg"></i>Chat</button>
+        </div>
+
+        <div class="contact_owner">
+          <h4 class="rsT2">Contact The Space Owner</h4>
+          <form [formGroup]="contactSellerForm" (ngSubmit)="enquiryToSeller($event)">
+            <div class="form-group fg1">
+              <input type="text" class="form-control" id="name" placeholder="Name *" name="name" formControlName="name"
+                [ngClass]="{'error': contactSellerForm.controls['name'].invalid && contactSellerForm.controls.name.dirty}"
+                required>
+            </div>
+
+            <div
+              *ngIf="contactSellerForm.controls['name'].invalid && (contactSellerForm.controls['name'].dirty || contactSellerForm.controls['name'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="contactSellerForm.controls['name'].errors.required">
+                <i class="fa fa-exclamation-triangle"></i> Username is required.
+              </div>
+            </div>
+
+            <div class="form-group fg1">
+              <input type="tel" class="form-control" id="phone" placeholder="Phone *" name="phone"
+                formControlName="phone"
+                [ngClass]="{'error': contactSellerForm.controls['phone'].invalid && contactSellerForm.controls.phone.dirty}"
+                required>
+            </div>
+            <div
+              *ngIf="contactSellerForm.controls['phone'].invalid && (contactSellerForm.controls['phone'].dirty || contactSellerForm.controls['phone'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="contactSellerForm.controls['phone'].errors.required">
+                <i class="fa fa-exclamation-triangle"></i> Phone number is required.
+              </div>
+            </div>
+
+            <div class="form-group fg1">
+              <input type="email" class="form-control" id="email" placeholder="Email *" name="email"
+                formControlName="email"
+                [ngClass]="{'error': contactSellerForm.controls['email'].invalid && contactSellerForm.controls.email.dirty}"
+                required>
+            </div>
+            <div
+              *ngIf="contactSellerForm.controls['email'].invalid && (contactSellerForm.controls['email'].dirty || contactSellerForm.controls['email'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="contactSellerForm.controls['email'].errors.required">
+                <i class="fa fa-exclamation-triangle"></i> Email required.
+              </div>
+              <div *ngIf="contactSellerForm.controls['email'].errors?.pattern">
+                <i class="fa fa-exclamation-triangle"></i> Email is not valid.
+              </div>
+            </div>
+
+            <div class="form-group fg1">
+              <textarea class="form-control" rows="5" id="message" placeholder="Your enquiry *"
+                formControlName="message"
+                [ngClass]="{'error': contactSellerForm.controls['message'].invalid && contactSellerForm.controls.message.dirty}"
+                required></textarea>
+            </div>
+            <div
+              *ngIf="contactSellerForm.controls['message'].invalid && (contactSellerForm.controls['message'].dirty || contactSellerForm.controls['message'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="contactSellerForm.controls['message'].errors.required">
+                <i class="fa fa-exclamation-triangle"></i> Write your enquiry.
+              </div>
+              <div *ngIf="contactSellerForm.controls['message'].errors.minlength">
+                <i class="fa fa-exclamation-triangle"></i> Minimum 20 words required.
+              </div>
+            </div>
+
+            <div class="btn_SND">
+              <button type="submit" class="btn btn_send">Send</button>
+            </div>
+          </form>
+
+        </div>
+        <div class="ad" *ngIf="SimilarSpaces != ''">
+          <h4 class="rsT2">Similar Featured Spaces</h4>
+          <div *ngFor="let ads of SimilarSpaces">
+            <div class="spacebox">
+              <div class="imagebox" (click)="viewSpace(ads.data.id)">
+                <img src="{{picURL}}/{{ads.data.owner_id}}/{{ads.pic}}">
+              </div>
+              <div class="spaceboxtext">
+                <h5 class="fetured_T">{{ads.data.title}}</h5>
+                <h6 class="loc"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span *ngIf="ads.data.cityname">{{ads.data.cityname}},</span>
+                  <span *ngIf="!ads.data.cityname">{{ads.data.statename}},</span>
+                  <span> {{ads.data.statename}} </span>
+                  <span> {{ads.data.postcode}}</span>
+                </h6>
+                <div class="starbox starRating">
+                  <ng-template #x let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                  </ng-template>
+                  <ngb-rating [rate]="ads?.data?.review[0]?.average | number" [starTemplate]="x" max="5"
+                    [readonly]="true">
+                  </ngb-rating>
+                  <span *ngIf="ads?.data?.review[0]?.total_review"><b>
+                      {{ ads?.data?.review[0]?.total_review | number }}</b></span>
+                  <span *ngIf="!ads?.data?.review[0]?.total_review"><b> {{ '0' }}</b></span>
+                </div>
+                <button type="button" class="btn btn-block btn_view" (click)="viewSpace(ads.data.id)">View
+                  Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container>
+    <ngx-spinner bdOpacity=0.9 bdColor="#f39868" size="medium" color="#4abfb3" type="ball-clip-rotate-pulse">
+      <p style="color: white"> Loading... Please wait </p>
+    </ngx-spinner>
+  </ng-container>
+</section>

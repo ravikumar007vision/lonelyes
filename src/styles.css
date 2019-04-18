@@ -1,0 +1,322 @@
+/* You can add global styles to this file, and also import other style files */
+
+.customcolor {
+  color: #4abfb3;
+  /* green */
+  color: #f39968;
+  /* orange */
+  color: #091d36;
+  /*dark blue */
+  color: #383838;
+  /* footergrey */
+  color: #4267b2;
+  /* facebook */
+  color: #464646;
+  /* darkgrey */
+  color: #f3f3f3;
+  /* lightgrey */
+  color: #ebe7e3;
+  /* lightergrey */
+}
+
+/* its https://fonts.google.com/specimen/Montserrat
+everywhere
+P = 14px light
+heading it will be regular
+rest all light
+17px for property heading
+30px for slider property heading */
+
+/* xs (for phones - screens less than 768px wide)
+sm (for tablets - screens equal to or greater than 768px wide)
+md (for small laptops - screens equal to or greater than 992px wide)
+lg (for laptops and desktops - screens equal to or greater than 1200px wide)
+ */
+
+/* this.router.navigate(['space-detail']); */
+
+body {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+/* background color */
+
+.bg-green {
+  background-color: #4abfb3;
+}
+
+.bg-orange {
+  background-color: #f39868;
+}
+
+.bg-blue {
+  background-color: #091d36;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-lightgreen {
+  background-color: rgba(74, 191, 179, 0.2);
+}
+
+td.bg-danger {
+  background-color: #f39967 !important;
+}
+
+.btn-danger {
+  background-color: #f39967 !important;
+  border-color: #f39967 !important;
+}
+
+/* color */
+
+.color-green {
+  color: #4abfb3 !important;
+}
+
+.color-white {
+  color: #ffffff !important;
+}
+
+.color-grey {
+  color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.color-orange {
+  color: #f39868 !important;
+}
+
+.color-blue {
+  color: #091d36 !important;
+}
+
+.color-red {
+  color: rgb(223, 62, 62) !important;
+}
+
+.checked {
+  color: #f39868 !important;
+}
+
+.dis_inline {
+  display: inline;
+}
+
+/* font sizes */
+
+.f11 {
+  font-size: 11px !important;
+}
+
+.f12 {
+  font-size: 12px !important;
+}
+
+.f13 {
+  font-size: 13px !important;
+}
+
+.f14 {
+  font-size: 14px !important;
+}
+
+.f15 {
+  font-size: 15px !important;
+}
+
+.f16 {
+  font-size: 16px !important;
+}
+
+.f17 {
+  font-size: 17px !important;
+}
+
+.f18 {
+  font-size: 18px !important;
+}
+
+.f19 {
+  font-size: 19px !important;
+}
+
+.f21 {
+  font-size: 21px;
+}
+
+.f30 {
+  font-size: 30px;
+}
+
+.f31 {
+  font-size: 31px !important;
+}
+
+.f600 {
+  font-weight: 600 !important;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+/* link styling */
+
+a:hover {
+  cursor: pointer;
+}
+
+a:visited {
+  color: white;
+}
+
+/* button styling */
+
+.btn-blue {
+  color: white !important;
+  background-color: #091d36 !important;
+  font-weight: 600 !important;
+}
+
+.btn-green {
+  background-color: #4abfb3;
+  color: white;
+  font-weight: 600 !important;
+}
+
+/* global alert */
+
+.alert {
+  padding: 0px 0 0 6px !important;
+  margin-bottom: 0 !important;
+  border: none !important;
+  border-radius: 2px !important;
+  font-size: 13px !important;
+}
+
+/* tooltip */
+
+.tooltip {
+  max-width: 300px !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+/* modal styel */
+
+.modal-header {
+  color: #4abfb3;
+}
+
+[type="reset"],
+[type="submit"],
+button,
+html [type="button"] {
+  -webkit-appearance: inherit !important;
+}
+
+/*  star rating */
+ngb-rating:focus {
+  outline: none !important;
+}
+
+.starRating .star {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  color: #d3d3d3;
+}
+
+.starRating .full {
+  color: #091c36;
+}
+
+.starRating .half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #091c36;
+}
+
+/* ---------- */
+
+
+.userlogin .popover {
+  width: 100% !important;
+}
+
+/* header notification dropdown */
+.topbar .popover-body {
+  padding: 0 !important;
+  max-height: 215px;
+  overflow: auto;
+}
+
+.topbar .popover .arrow {
+  /* display: none !important; */
+  background-color: #4abfb3;
+  margin-left: -6px !important;
+}
+
+.topbar .popover-body li {
+  padding: 4px 4px !important;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif !important;
+  background-color: rgba(74, 191, 179, 0.21);
+}
+
+.topbar .popover-body li:hover {
+  background-color: #4abfb3;
+  cursor: pointer;
+  color: white !important;
+}
+
+.topbar .popover-body li:hover .fa {
+  color: white !important;
+}
+
+/*------------- scroll bar style -------------*/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4abfb3;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4abfb3;
+}
+
+/* ------------------- */
+
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+
+}
+
+@media only screen and (min-device-width: 621px) and (max-device-width: 767px) {
+  /* For ipad: */
+}
+
+/* terms and conditions pop up on sign up page*/
+.terms_and_conditions_section p,
+.privacy_and_policy_section p {
+  font-size: 14px;
+}
