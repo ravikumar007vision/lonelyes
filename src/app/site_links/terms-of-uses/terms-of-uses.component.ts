@@ -17,6 +17,7 @@ export class TermsOfUsesComponent implements OnInit {
     private appAlert: AppAlertService,
     private titleService: Title) { }
 
+
   ngOnInit() {
     this.spinner.show();
     this.titleService.setTitle('Terms and Conditions : :  Lonely Spaces');

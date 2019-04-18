@@ -19,7 +19,6 @@ export class AdvocateProgramComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Advocate Program : :  Lonely Spaces');
-
     this.spinner.show();
     this.userService.getPageContent(5).then((response) => {
       console.log(response);
